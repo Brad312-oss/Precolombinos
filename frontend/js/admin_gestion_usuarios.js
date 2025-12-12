@@ -1,31 +1,40 @@
+// Evento que se dispara cuando la página se muestra (incluyendo cuando se navega con atrás/adelante)
 window.addEventListener('pageshow', function (event) {
+  // Si la página está en cache (persisted) o es una navegación con back/forward, recarga la página
   if (event.persisted || (window.performance && performance.getEntriesByType("navigation")[0].type === "back_forward")) {
     location.reload();
   }
 });
 
-let usuarioActualId;
+let usuarioActualId; // Variable para almacenar el ID del usuario actual
 
+// Cuando el DOM esté cargado, se ejecuta esta función
 document.addEventListener('DOMContentLoaded', () => {
+  // Se obtiene el usuario guardado en localStorage
   const usuarioRaw = localStorage.getItem('usuario');
 
+  // Si no hay usuario, redirige a la página de login
   if (!usuarioRaw) {
     location.href = '/index.html';
     return;
   }
 
   const usuario = JSON.parse(usuarioRaw);
+  // Verifica que el usuario tenga el rol correcto (3 = administrador)
   if (usuario.id_rol !== 3) {
     location.href = '/index.html';
     return;
   }
 
-  usuarioActualId = usuario.usuario_id;
+  usuarioActualId = usuario.usuario_id; // Guarda el id del usuario actual
 
-  listarUsuarios();
+  listarUsuarios(); // Carga la lista de usuarios en la tabla
+
+  // Evento para el botón de cerrar sesión
   document.getElementById('logoutBtn').addEventListener('click', cerrarSesion);
 });
 
+// Función para decodificar el JWT y obtener sus datos
 function parseJwt(token) {
   try {
     const base64Url = token.split('.')[1];
@@ -37,10 +46,11 @@ function parseJwt(token) {
     );
     return JSON.parse(base64);
   } catch (e) {
-    return null;
+    return null; // Retorna null si el token no es válido
   }
 }
 
+// Función que retorna los headers necesarios para las peticiones con token
 function getTokenHeaders() {
   const token = localStorage.getItem('token');
   return {
@@ -49,8 +59,10 @@ function getTokenHeaders() {
   };
 }
 
+// Función asíncrona para listar los usuarios en la tabla
 async function listarUsuarios() {
   try {
+    // Petición GET a la API para obtener los usuarios
     const res = await fetch('http://localhost:3000/api/usuarios/listar', {
       method: 'GET',
       headers: getTokenHeaders()
@@ -60,11 +72,13 @@ async function listarUsuarios() {
     if (!res.ok) throw new Error(data.message || 'Error al obtener usuarios');
 
     const tbody = document.getElementById('tablaUsuarios');
-    tbody.innerHTML = '';
+    tbody.innerHTML = ''; // Limpia la tabla antes de llenar
 
+    // Por cada usuario recibido, crea una fila en la tabla con sus datos y botones de acción
     data.forEach(usuario => {
       const tr = document.createElement('tr');
 
+      // Celdas con información del usuario
       const tdId = document.createElement('td');
       tdId.textContent = usuario.usuario_id;
       tr.appendChild(tdId);
@@ -91,18 +105,19 @@ async function listarUsuarios() {
 
       const acciones = document.createElement('td');
 
-      tr.appendChild(acciones);
-
+      // Botón para editar usuario
       const btnEditar = document.createElement('button');
       btnEditar.textContent = 'Editar';
       btnEditar.onclick = () => editarUsuario(usuario.usuario_id);
       acciones.appendChild(btnEditar);
 
+      // Botón para eliminar usuario
       const btnEliminar = document.createElement('button');
       btnEliminar.textContent = 'Eliminar';
       btnEliminar.onclick = () => eliminarUsuario(usuario.usuario_id);
       acciones.appendChild(btnEliminar);
 
+      // Botón para banear o desbanear según estado del usuario
       if (usuario.estado === 'baneado') {
         const btnDesbanear = document.createElement('button');
         btnDesbanear.textContent = 'Desbanear';
@@ -115,20 +130,24 @@ async function listarUsuarios() {
         acciones.appendChild(btnBanear);
       }
 
+      // Botón para enviar correo al usuario
       const btnCorreo = document.createElement('button');
       btnCorreo.textContent = 'Correo';
       btnCorreo.onclick = () => enviarCorreo(usuario.correo);
       acciones.appendChild(btnCorreo);
 
+      // Obtiene datos del token para controlar acciones sobre roles
       const token = parseJwt(localStorage.getItem('token'));
       
       if (usuario.id_rol === 3) {
+        // Si el usuario es admin, puede quitar el rol a otros admins (menos a sí mismo)
         const btnQuitarAdmin = document.createElement('button');
         btnQuitarAdmin.textContent = 'Quitar Admin';
         
         if (token.id !== usuario.usuario_id) {
           btnQuitarAdmin.onclick = () => quitarRolAdmin(usuario.usuario_id);
         } else {
+          // No puede quitarse su propio rol de admin
           btnQuitarAdmin.disabled = true;
           btnQuitarAdmin.title = "No puedes quitarte tu propio rol";
         }
@@ -136,7 +155,7 @@ async function listarUsuarios() {
         acciones.appendChild(btnQuitarAdmin);
       
       } else {
-
+        // Si no es admin, puede ser promovido a admin
         const btnHacerAdmin = document.createElement('button');
         btnHacerAdmin.textContent = 'Hacer Admin';
         btnHacerAdmin.onclick = () => cambiarRolAdmin(usuario.usuario_id);
@@ -153,6 +172,7 @@ async function listarUsuarios() {
   }
 }
 
+// Función para banear un usuario, evita que el usuario se banee a sí mismo
 async function banearUsuario(id) {
   const usuarioActual = JSON.parse(localStorage.getItem('usuario'));
   if (usuarioActual.usuario_id === id) {
@@ -178,6 +198,7 @@ async function banearUsuario(id) {
   }
 }
 
+// Función para enviar correo al usuario con asunto y mensaje que el admin ingresa por prompt
 function enviarCorreo(correo) {
   const asunto = prompt('Asunto del correo:');
   const mensaje = prompt('Mensaje para enviar:');
@@ -198,12 +219,14 @@ function enviarCorreo(correo) {
     });
 }
 
+// Función para cerrar sesión, eliminando token y usuario del localStorage y redirigiendo al login
 function cerrarSesion() {
   localStorage.removeItem('token');
   localStorage.removeItem('usuario');
   location.href = '/index.html';
 }
 
+// Función para editar los datos de un usuario, solicitando nuevos datos con prompt
 async function editarUsuario(id) {
   const nombre = prompt('Nuevo nombre:');
   const apellido = prompt('Nuevo apellido:');
@@ -237,6 +260,7 @@ async function editarUsuario(id) {
   }
 }
 
+// Función para eliminar un usuario, evitando que el usuario se elimine a sí mismo
 async function eliminarUsuario(id) {
   const usuarioActual = JSON.parse(localStorage.getItem('usuario'));
   if (usuarioActual.usuario_id === id) {
@@ -261,6 +285,7 @@ async function eliminarUsuario(id) {
   }
 }
 
+// Función para desbanear un usuario
 async function desbanearUsuario(usuario_id) {
   const token = localStorage.getItem('token');
   try {
@@ -285,6 +310,7 @@ async function desbanearUsuario(usuario_id) {
   }
 }
 
+// Función para cambiar el rol de un usuario a administrador
 async function cambiarRolAdmin(id) {
   if (!confirm('¿Deseas convertir este usuario en administrador?')) return;
 
@@ -304,6 +330,7 @@ async function cambiarRolAdmin(id) {
     alert('Rol actualizado a Administrador');
     listarUsuarios();
 
+    // Actualiza localStorage si el rol modificado es del usuario actual
     if (id === usuarioActualId) {
       const actualizado = JSON.parse(localStorage.getItem('usuario'));
       actualizado.id_rol = 3;
@@ -316,6 +343,7 @@ async function cambiarRolAdmin(id) {
   }
 }
 
+// Función para quitar el rol de administrador a un usuario (pasándolo a cliente)
 async function quitarRolAdmin(id) {
   if (id === usuarioActualId) {
     alert('No puedes quitarte tu propio rol de administrador.');

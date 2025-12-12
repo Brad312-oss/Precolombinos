@@ -1,126 +1,139 @@
+/* Restablece márgenes y rellenos predeterminados y ajusta el modelo de caja */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0; /* Elimina el margen por defecto de todos los elementos */
+  padding: 0; /* Elimina el relleno por defecto de todos los elementos */
+  box-sizing: border-box; /* Incluye el borde y el relleno en las dimensiones del elemento */
 }
 
+/* Estilo general para el cuerpo del documento */
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #fefefe;
-  color: #111;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  font-family: 'Segoe UI', sans-serif; /* Establece la tipografía para todo el cuerpo */
+  background-color: #fefefe; /* Color de fondo muy claro */
+  color: #111; /* Color de texto oscuro */
+  padding: 1.5rem; /* Agrega espacio interno alrededor del cuerpo */
+  display: flex; /* Utiliza flexbox para organizar los elementos */
+  flex-direction: column; /* Coloca los elementos en una columna */
+  align-items: center; /* Centra los elementos horizontalmente */
 }
 
+/* Estilo para el encabezado (logo o imagen principal) */
 header {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1.5rem;
+  width: 100%; /* El encabezado ocupa el 100% del ancho */
+  display: flex; /* Utiliza flexbox para organizar los elementos dentro del encabezado */
+  justify-content: center; /* Centra la imagen horizontalmente */
+  margin-bottom: 1.5rem; /* Agrega espacio abajo del encabezado */
 }
 
+/* Ajustes de tamaño para la imagen en el encabezado */
 header img {
-  width: 120px;
-  height: auto;
+  width: 120px; /* Establece el ancho de la imagen */
+  height: auto; /* Mantiene la proporción original de la imagen */
 }
 
-/* Títulos */
+/* Estilos para los títulos (h2, h3) */
 h2, h3 {
-  text-align: center;
-  margin-bottom: 1rem;
-  color: #222;
+  text-align: center; /* Centra el texto de los títulos */
+  margin-bottom: 1rem; /* Agrega espacio debajo de los títulos */
+  color: #222; /* Color de texto oscuro */
 }
 
+/* Estilo para el contenedor de reseñas */
 #listaResenas {
-  width: 100%;
-  max-width: 700px;
-  margin-bottom: 2rem;
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #fafafa;
+  width: 100%; /* El contenedor ocupa todo el ancho disponible */
+  max-width: 700px; /* Establece un ancho máximo de 700px */
+  margin-bottom: 2rem; /* Agrega espacio debajo del contenedor */
+  padding: 1rem; /* Espaciado interno dentro del contenedor */
+  border: 1px solid #ddd; /* Borde sutil alrededor del contenedor */
+  border-radius: 8px; /* Bordes redondeados */
+  background-color: #fafafa; /* Fondo muy claro */
 }
 
+/* Espaciado dentro de cada bloque de reseña */
 #listaResenas div {
-  margin-bottom: 1rem;
+  margin-bottom: 1rem; /* Espacio entre cada bloque de reseña */
 }
 
+/* Estilo para los formularios */
 form {
-  width: 100%;
-  max-width: 500px;
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #fff;
+  width: 100%; /* El formulario ocupa todo el ancho disponible */
+  max-width: 500px; /* Establece un ancho máximo de 500px */
+  padding: 1rem; /* Espaciado interno dentro del formulario */
+  border: 1px solid #ddd; /* Borde sutil alrededor del formulario */
+  border-radius: 8px; /* Bordes redondeados */
+  background-color: #fff; /* Fondo blanco */
 }
 
+/* Estilos para las etiquetas de los campos del formulario */
 label {
-  font-weight: bold;
+  font-weight: bold; /* Hace que las etiquetas sean negritas */
 }
 
+/* Estilos comunes para los campos de selección y textarea */
 select, textarea {
-  width: 100%;
-  margin-bottom: 1rem;
-  padding: 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-family: inherit;
+  width: 100%; /* Los campos ocupan todo el ancho disponible */
+  margin-bottom: 1rem; /* Espacio debajo de cada campo */
+  padding: 0.6rem; /* Espaciado interno en los campos */
+  border: 1px solid #ccc; /* Borde sutil */
+  border-radius: 4px; /* Bordes ligeramente redondeados */
+  font-family: inherit; /* Hereda la tipografía del contenedor */
 }
 
+/* Estilo para los botones */
 button {
-  background-color: #000;
-  color: #ffd700;
-  border: none;
-  padding: 0.75rem 1.2rem;
-  margin: 0.5rem 0;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  width: 100%;
-  max-width: 200px;
-  transition: background-color 0.3s ease;
+  background-color: #000; /* Fondo negro */
+  color: #ffd700; /* Color de texto dorado */
+  border: none; /* Sin borde */
+  padding: 0.75rem 1.2rem; /* Relleno alrededor del texto del botón */
+  margin: 0.5rem 0; /* Espacio arriba y abajo del botón */
+  border-radius: 5px; /* Bordes redondeados */
+  font-size: 1rem; /* Tamaño de fuente estándar */
+  font-weight: bold; /* Texto en negrita */
+  cursor: pointer; /* El cursor cambia a un puntero cuando se pasa por encima */
+  width: 100%; /* El botón ocupa todo el ancho disponible */
+  max-width: 200px; /* Pero no supera los 200px de ancho */
+  transition: background-color 0.3s ease; /* Efecto de transición al cambiar el color de fondo */
 }
 
+/* Estilo del botón cuando se pasa el ratón por encima */
 button:hover {
-  background-color: #333;
+  background-color: #333; /* Cambia el fondo a gris oscuro al pasar el ratón */
 }
 
+/* Estilos para pantallas con un ancho máximo de 768px (tablets) */
 @media (max-width: 768px) {
   header img {
-    width: 100px;
+    width: 100px; /* Ajusta el tamaño de la imagen en el encabezado */
   }
 
   h2, h3 {
-    font-size: 1.4rem;
+    font-size: 1.4rem; /* Ajusta el tamaño de la fuente de los títulos */
   }
 
   form, #listaResenas {
-    padding: 1rem;
+    padding: 1rem; /* Ajusta el relleno dentro de los contenedores */
   }
 
   button {
-    width: 100%;
+    width: 100%; /* Hace que el botón ocupe todo el ancho en pantallas pequeñas */
   }
 }
 
+/* Estilos para pantallas con un ancho máximo de 480px (móviles) */
 @media (max-width: 480px) {
   header img {
-    width: 80px;
+    width: 80px; /* Ajusta el tamaño de la imagen en pantallas muy pequeñas */
   }
 
   h2, h3 {
-    font-size: 1.2rem;
+    font-size: 1.2rem; /* Reduce aún más el tamaño de la fuente de los títulos */
   }
 
   select, textarea {
-    font-size: 0.95rem;
+    font-size: 0.95rem; /* Ajusta el tamaño de la fuente de los campos */
   }
 
   button {
-    font-size: 0.95rem;
-    padding: 0.6rem 1rem;
+    font-size: 0.95rem; /* Ajusta el tamaño de la fuente del botón */
+    padding: 0.6rem 1rem; /* Ajusta el relleno del botón */
   }
 }

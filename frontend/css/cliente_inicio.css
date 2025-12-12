@@ -1,79 +1,90 @@
+/* Reset básico: elimina márgenes, rellenos y establece box-sizing */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0; /* Elimina los márgenes por defecto */
+  padding: 0; /* Elimina el relleno por defecto */
+  box-sizing: border-box; /* Incluye bordes y rellenos dentro del tamaño total del elemento */
 }
 
+/* Estilos generales del body */
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #fefefe;
-  color: #111;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  font-family: 'Segoe UI', sans-serif; /* Fuente general */
+  background-color: #fefefe; /* Fondo blanco muy suave */
+  color: #111; /* Color de texto oscuro */
+  padding: 1rem; /* Relleno de 1rem a todos los lados */
+  display: flex; /* Utiliza flexbox para centrar los elementos */
+  flex-direction: column; /* Los elementos hijos se apilan verticalmente */
+  align-items: center; /* Centra los elementos horizontalmente */
 }
 
+/* Estilos del header */
 header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-  width: 100%;
+  display: flex; /* Utiliza flexbox para alinear el contenido */
+  align-items: center; /* Alinea verticalmente */
+  justify-content: center; /* Centra horizontalmente */
+  margin-bottom: 1.5rem; /* Margen inferior para separar del resto del contenido */
+  width: 100%; /* El header ocupa el 100% del ancho */
 }
 
+/* Estilos para la imagen del logo dentro del header */
 header img {
-  width: 120px;
-  height: auto;
+  width: 120px; /* El ancho de la imagen es de 120px */
+  height: auto; /* Mantiene la relación de aspecto de la imagen */
 }
 
+/* Estilos para los encabezados h2 */
 h2 {
-  margin-bottom: 1rem;
-  font-size: 1.8rem;
-  text-align: center;
+  margin-bottom: 1rem; /* Margen inferior para separar del contenido siguiente */
+  font-size: 1.8rem; /* Tamaño de fuente grande para h2 */
+  text-align: center; /* Centra el texto */
 }
 
+/* Estilos para el botón */
 button {
-  background-color: #000;
-  color: #ffd700;
-  border: none;
-  padding: 0.75rem 1.2rem;
-  margin: 0.5rem;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 250px;
-  max-width: 90%;
+  background-color: #000; /* Fondo negro */
+  color: #ffd700; /* Texto dorado */
+  border: none; /* Sin borde */
+  padding: 0.75rem 1.2rem; /* Relleno interno */
+  margin: 0.5rem; /* Margen alrededor */
+  border-radius: 5px; /* Bordes redondeados */
+  font-size: 1rem; /* Tamaño de la fuente */
+  font-weight: bold; /* Negrita en el texto */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  transition: background-color 0.3s ease; /* Transición suave para el cambio de fondo */
+  width: 250px; /* Ancho fijo de 250px */
+  max-width: 90%; /* El ancho máximo será el 90% del contenedor */
 }
 
+/* Efecto hover para el botón */
 button:hover {
-  background-color: #333;
+  background-color: #333; /* Cambia el color de fondo a gris oscuro cuando se pasa el cursor */
 }
 
+/* === Media Queries para dispositivos móviles === */
+
+/* Estilos para pantallas de hasta 768px (tabletas) */
 @media (max-width: 768px) {
   h2 {
-    font-size: 1.6rem;
+    font-size: 1.6rem; /* Reduce el tamaño de la fuente del título */
   }
 
   button {
-    font-size: 0.95rem;
-    width: 90%;
+    font-size: 0.95rem; /* Reduce el tamaño de la fuente en el botón */
+    width: 90%; /* El botón ocupará el 90% del ancho disponible */
   }
 }
 
+/* Estilos para pantallas de hasta 480px (móviles) */
 @media (max-width: 480px) {
   header img {
-    width: 90px;
+    width: 90px; /* Reduce el tamaño de la imagen del logo a 90px */
   }
 
   h2 {
-    font-size: 1.4rem;
+    font-size: 1.4rem; /* Reduce el tamaño del título aún más */
   }
 
   button {
-    font-size: 0.9rem;
-    width: 100%;
+    font-size: 0.9rem; /* Reduce el tamaño de la fuente en el botón */
+    width: 100%; /* El botón ocupará todo el ancho disponible */
   }
 }

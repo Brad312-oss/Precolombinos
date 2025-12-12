@@ -1,20 +1,25 @@
+// Espera a que todo el DOM esté cargado para ejecutar las funciones iniciales
 document.addEventListener('DOMContentLoaded', async () => {
-  verificarAdmin();
-  listarVentas();
-  cargarClientes();
-  agregarFilaProducto();
+  verificarAdmin(); // Verifica que el usuario sea administrador antes de continuar
+  listarVentas(); // Carga la lista de ventas existentes
+  cargarClientes(); // Carga los clientes en el select para registrar ventas
+  agregarFilaProducto(); // Agrega una fila para seleccionar productos en el formulario
+  // Evento para cuando se envía el formulario de registro de venta
   document.getElementById('formRegistrarVenta').addEventListener('submit', registrarVenta);
+  // Evento para agregar una nueva fila de producto al hacer clic en el botón correspondiente
   document.getElementById('agregarProducto').addEventListener('click', agregarFilaProducto);
 });
 
+// Función que retorna las cabeceras HTTP necesarias con el token para autenticación
 function getTokenHeaders() {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token'); // Obtener token desde localStorage
   return {
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${token}`
+    Authorization: `Bearer ${token}` // Se incluye el token en la cabecera Authorization
   };
 }
 
+// Verifica que el usuario logueado sea administrador (rol 3)
 async function verificarAdmin() {
   try {
     const res = await fetch('http://localhost:3000/api/auth/verificar', {
@@ -27,13 +32,13 @@ async function verificarAdmin() {
     const data = await res.json();
     console.log('Usuario verificado:', data);
 
-    if (data.usuario.id_rol !== 3) {
+    if (data.usuario.id_rol !== 3) { // Si el rol no es administrador, redirige
       alert('Acceso denegado');
       window.location.href = '/pages/login.html';
       return false;
     }
 
-    return true;
+    return true; // Usuario es administrador
   } catch (err) {
     console.error(err);
     alert('Sesión inválida');
@@ -42,6 +47,7 @@ async function verificarAdmin() {
   }
 }
 
+// Obtiene y muestra la lista de ventas en la tabla correspondiente
 async function listarVentas() {
   try {
     const res = await fetch('http://localhost:3000/api/ventas/detalles', {
@@ -53,7 +59,7 @@ async function listarVentas() {
     if (!res.ok) throw new Error(data.message || 'Error al obtener ventas');
 
     const tbody = document.getElementById('tablaVentas');
-    tbody.innerHTML = '';
+    tbody.innerHTML = ''; // Limpia tabla antes de agregar datos
 
     data.forEach(venta => {
       const tr = document.createElement('tr');
@@ -76,6 +82,7 @@ async function listarVentas() {
   }
 }
 
+// Muestra detalle de productos de una venta en una alerta
 async function verDetalleVenta(venta_id) {
   try {
     const res = await fetch(`http://localhost:3000/api/ventas/detalles?id=${venta_id}`, {
@@ -98,6 +105,7 @@ async function verDetalleVenta(venta_id) {
   }
 }
 
+// Muestra un prompt para actualizar el estado de una venta y llama a la función para actualizarlo
 function mostrarFormularioEstado(venta_id, estadoActual) {
   const nuevoEstado = prompt(`Estado actual: ${estadoActual}\n\nIngrese el nuevo estado (en proceso / entregada / cancelada):`);
   if (nuevoEstado && ['en proceso', 'entregada', 'cancelada'].includes(nuevoEstado)) {
@@ -107,6 +115,7 @@ function mostrarFormularioEstado(venta_id, estadoActual) {
   }
 }
 
+// Actualiza el estado de la venta en el servidor
 async function actualizarEstadoVenta(venta_id, nuevoEstado) {
   try {
     const res = await fetch(`http://localhost:3000/api/ventas/actualizar-estado/${venta_id}`, {
@@ -118,21 +127,23 @@ async function actualizarEstadoVenta(venta_id, nuevoEstado) {
     const data = await res.json();
     if (!res.ok) throw new Error(data.message);
     alert('Estado actualizado correctamente');
-    listarVentas();
+    listarVentas(); // Refresca la lista para mostrar el nuevo estado
   } catch (err) {
     console.error(err);
     alert('Error al actualizar el estado');
   }
 }
 
+// Registra una nueva venta con los productos seleccionados y cantidades indicadas
 async function registrarVenta(e) {
-  e.preventDefault();
+  e.preventDefault(); // Evita que el formulario recargue la página
 
   const token = localStorage.getItem('token');
   const usuario_id = document.getElementById('clienteSelect').value;
-  const fecha = new Date().toISOString().split('T')[0];
+  const fecha = new Date().toISOString().split('T')[0]; // Fecha actual formato YYYY-MM-DD
   let total = 0;
 
+  // Obtiene todas las filas de productos agregadas
   const filas = document.querySelectorAll('#productosVenta tbody tr');
   const productos = [];
 
@@ -163,10 +174,10 @@ async function registrarVenta(e) {
     const data = await res.json();
     if (res.ok) {
       alert('Venta registrada correctamente');
-      listarVentas();
-      document.getElementById('formRegistrarVenta').reset();
-      document.querySelector('#productosVenta tbody').innerHTML = '';
-      document.getElementById('totalVenta').textContent = '0.00';
+      listarVentas(); // Actualiza la lista con la nueva venta
+      document.getElementById('formRegistrarVenta').reset(); // Limpia formulario
+      document.querySelector('#productosVenta tbody').innerHTML = ''; // Limpia filas de productos
+      document.getElementById('totalVenta').textContent = '0.00'; // Reinicia total
     } else {
       alert('Error: ' + data.message);
     }
@@ -176,6 +187,7 @@ async function registrarVenta(e) {
   }
 }
 
+// Carga los clientes desde el servidor y los añade al select para elegir cliente en la venta
 async function cargarClientes() {
   try {
     const token = localStorage.getItem('token');
@@ -199,6 +211,7 @@ async function cargarClientes() {
   }
 }
 
+// Añade una nueva fila en la tabla de productos para registrar venta
 function agregarFilaProducto() {
   const tbody = document.querySelector('#productosVenta tbody');
 
@@ -220,12 +233,14 @@ function agregarFilaProducto() {
 
   cargarOpcionesProducto(tr.querySelector('.productoSelect'));
 
+  // Evento para eliminar la fila de producto
   tr.querySelector('.eliminarFila').addEventListener('click', () => {
-  tr.remove();
-  actualizarTotalVenta();
-});
+    tr.remove();
+    actualizarTotalVenta(); // Actualiza el total cuando se elimina un producto
+  });
 }
 
+// Carga los productos desde el servidor para llenar el select de productos
 async function cargarOpcionesProducto(selectElement) {
   try {
     const res = await fetch('http://localhost:3000/api/productos', {
@@ -239,10 +254,11 @@ async function cargarOpcionesProducto(selectElement) {
       const option = document.createElement('option');
       option.value = producto.producto_id;
       option.textContent = `${producto.nombre_pieza} - ${producto.cultura} - ${producto.tamanio} ($${producto.precio})`;
-      option.dataset.precio = producto.precio;
+      option.dataset.precio = producto.precio; // Guarda precio para cálculo posterior
       selectElement.appendChild(option);
     });
 
+    // Actualiza subtotal cuando se cambia producto o cantidad
     selectElement.addEventListener('change', actualizarSubtotal);
     selectElement.closest('tr').querySelector('.cantidad').addEventListener('input', actualizarSubtotal);
 
@@ -255,7 +271,7 @@ async function cargarOpcionesProducto(selectElement) {
       fila.querySelector('.precio').textContent = precio.toFixed(2);
       fila.querySelector('.subtotal').textContent = subtotal.toFixed(2);
 
-      actualizarTotalVenta();
+      actualizarTotalVenta(); // Actualiza total general
     }
 
   } catch (err) {
@@ -263,6 +279,7 @@ async function cargarOpcionesProducto(selectElement) {
   }
 }
 
+// Suma todos los subtotales de los productos para mostrar el total de la venta
 function actualizarTotalVenta() {
   let total = 0;
   document.querySelectorAll('.subtotal').forEach(cell => {

@@ -1,7 +1,12 @@
+// Importamos el módulo 'nodemailer', que permite enviar correos electrónicos desde Node.js.
 import nodemailer from 'nodemailer';
+
+// Importamos 'dotenv', una librería que permite cargar variables de entorno desde un archivo .env
 import dotenv from 'dotenv';
 dotenv.config();
 
+// Creamos un "transporter", que es el objeto responsable de enviar correos.
+// Aquí estamos usando el servicio de Gmail y autenticándonos con las credenciales guardadas en variables de entorno.
 export const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -10,6 +15,8 @@ export const transporter = nodemailer.createTransport({
   },
 });
 
+// Esta función permite enviar un correo genérico.
+// Recibe como parámetros: destinatario (to), asunto (subject) y el contenido en formato HTML (html).
 export const enviarCorreoGenerico = async (to, subject, html) => {
   await transporter.sendMail({
     from: process.env.EMAIL_USER,
@@ -19,6 +26,8 @@ export const enviarCorreoGenerico = async (to, subject, html) => {
   });
 };
 
+// Esta función envía un correo específico de confirmación de registro.
+// Se usa cuando un usuario se registra exitosamente en la plataforma.
 export const enviarCorreoConfirmacion = async (destinatario, nombre) => {
   const mailOptions = {
     from: process.env.EMAIL_USER,
@@ -29,6 +38,9 @@ export const enviarCorreoConfirmacion = async (destinatario, nombre) => {
 
   await transporter.sendMail(mailOptions);
 };
+
+// Esta función se utiliza para enviar un correo de recuperación de contraseña.
+// Incluye un enlace personalizado que permite al usuario restablecer su clave.
 export const enviarCorreoRecuperacion = async (destinatario, nombre, enlace) => {
   const mailOptions = {
     from: process.env.EMAIL_USER,

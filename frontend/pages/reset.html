@@ -1,58 +1,79 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Establecemos la codificación de caracteres y las configuraciones de la vista para dispositivos móviles -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- Título de la página que aparece en la pestaña del navegador -->
   <title>Restablecer Contraseña</title>
+  
+  <!-- Enlace al archivo de estilos CSS para personalizar la apariencia de la página -->
   <link rel="stylesheet" href="../css/reset.css" />
 </head>
 <body>
   <div class="container">
+    <!-- Título principal de la página -->
     <h2>Restablecer Contraseña</h2>
+
+    <!-- Formulario para ingresar la nueva contraseña -->
     <form id="resetForm">
+      <!-- Campo para ingresar la nueva contraseña -->
       <input type="password" id="nuevaContrasena" placeholder="Nueva contraseña" required />
+      
+      <!-- Campo para confirmar la nueva contraseña -->
       <input type="password" id="confirmarContrasena" placeholder="Confirmar contraseña" required />
+      
+      <!-- Botón para enviar el formulario y cambiar la contraseña -->
       <button type="submit">Cambiar Contraseña</button>
     </form>
+
+    <!-- Mensaje que se mostrará para indicar el estado del proceso -->
     <p id="mensaje"></p>
   </div>
 
+  <!-- Script para manejar el formulario de restablecimiento de contraseña -->
   <script>
     const form = document.getElementById('resetForm');
     const mensaje = document.getElementById('mensaje');
 
+    // Obtiene los parámetros de la URL (token y correo)
     const params = new URLSearchParams(window.location.search);
     const token = params.get('token');
     const correo = params.get('correo');
 
+    // Al hacer submit en el formulario, se ejecuta el siguiente código
     form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+      e.preventDefault(); // Previene el comportamiento predeterminado del formulario
 
       const nuevaContrasena = document.getElementById('nuevaContrasena').value;
       const confirmarContrasena = document.getElementById('confirmarContrasena').value;
 
+      // Validación para comprobar que las contraseñas coinciden
       if (nuevaContrasena !== confirmarContrasena) {
         mensaje.textContent = 'Las contraseñas no coinciden';
-        return;
+        return; // Detiene el proceso si las contraseñas no coinciden
       }
 
       try {
+        // Enviamos la solicitud para cambiar la contraseña al servidor
         const res = await fetch('http://localhost:3000/api/auth/cambiar-contrasena', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ correo, token, nuevaContrasena })
         });
 
-        const data = await res.json();
-        mensaje.textContent = data.message;
+        const data = await res.json(); // Parseamos la respuesta del servidor
+        mensaje.textContent = data.message; // Mostramos el mensaje del servidor
 
+        // Si la respuesta del servidor es exitosa, reiniciamos el formulario
         if (res.ok) {
           form.reset();
         }
 
       } catch (error) {
-        mensaje.textContent = 'Error al conectar con el servidor';
-        console.error(error);
+        mensaje.textContent = 'Error al conectar con el servidor'; // En caso de error, mostramos un mensaje
+        console.error(error); // Imprimimos el error en la consola
       }
     });
   </script>

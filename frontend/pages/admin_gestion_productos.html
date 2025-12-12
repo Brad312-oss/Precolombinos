@@ -1,112 +1,131 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Admin</title>
-  <link rel="stylesheet" href="../css/admin_gestion_productos.css">
+  <meta charset="UTF-8" /><!-- Codificación UTF-8 para soporte de caracteres especiales -->
+  <title>Admin</title><!-- Título de la pestaña -->
+  <link rel="stylesheet" href="../css/admin_gestion_productos.css"><!-- Estilos específicos para esta página -->
+
   <script>
+  // Verificar si el usuario está autenticado y tiene rol de administrador (id_rol=3)
   document.addEventListener('DOMContentLoaded', () => {
     const usuarioRaw = localStorage.getItem('usuario');
     if (!usuarioRaw) {
+      // Si no hay usuario en localStorage, redirigir al inicio
       window.location.replace('/index.html');
       return;
     }
 
     const usuario = JSON.parse(usuarioRaw);
     if (!usuario || Number(usuario.id_rol) !== 3) {
+      // Si el usuario no es admin, redirigir al inicio
       window.location.replace('/index.html');
       return;
     }
 
+    // Forzar recarga si se vuelve a la página desde el historial (para evitar contenido desactualizado)
     window.addEventListener('pageshow', (event) => {
       if (event.persisted || window.performance?.navigation.type === 2) {
         window.location.reload();
       }
     });
   });
-</script>
+  </script>
 </head>
 <body>
   <header>
-  <img src="../assets/img/logo.png" alt="Logo Precolombinos">
-  <h1>Panel de Administración - Productos</h1>
-  <nav>
-    <a href="admin_dashboard.html">Dashboard</a>
-    <a href="admin_gestion_usuarios.html">Usuarios</a>
-    <a href="admin_gestion_ventas.html">Ventas</a>
-    <a href="admin_gestion_reportes.html">Reportes</a>
-    <button id="logoutBtn">Cerrar sesión</button>
-  </nav>
-</header>
-<form id="formPieza">
-  <input type="text" id="nuevaPieza" placeholder="Nombre de la pieza" required />
-  <button type="submit">Agregar Pieza</button>
-</form>
+    <!-- Logo principal -->
+    <img src="../assets/img/logo.png" alt="Logo Precolombinos">
+    <!-- Título del panel de administración -->
+    <h1>Panel de Administración - Productos</h1>
 
-<table border="1">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody id="tablaPiezas"></tbody>
-</table>
+    <!-- Navegación principal del panel -->
+    <nav>
+      <a href="admin_dashboard.html">Dashboard</a>
+      <a href="admin_gestion_usuarios.html">Usuarios</a>
+      <a href="admin_gestion_ventas.html">Ventas</a>
+      <a href="admin_gestion_reportes.html">Reportes</a>
+      <button id="logoutBtn">Cerrar sesión</button><!-- Botón para cerrar sesión -->
+    </nav>
+  </header>
 
-<h3>Gestión de Tamaños</h3>
-<form id="formTamanio">
-  <input type="text" id="nuevoTamanio" placeholder="Nombre del tamaño" required />
-  <button type="submit">Agregar Tamaño</button>
-</form>
+  <!-- Formulario para agregar una nueva pieza -->
+  <form id="formPieza">
+    <input type="text" id="nuevaPieza" placeholder="Nombre de la pieza" required />
+    <button type="submit">Agregar Pieza</button>
+  </form>
 
-<table border="1">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody id="tablaTamanios"></tbody>
-</table>
+  <!-- Tabla para mostrar las piezas existentes -->
+  <table border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Acciones</th><!-- Para editar o eliminar piezas -->
+      </tr>
+    </thead>
+    <tbody id="tablaPiezas"></tbody><!-- Aquí se insertarán las filas dinámicamente -->
+  </table>
 
+  <!-- Gestión de tamaños -->
+  <h3>Gestión de Tamaños</h3>
+  <form id="formTamanio">
+    <input type="text" id="nuevoTamanio" placeholder="Nombre del tamaño" required />
+    <button type="submit">Agregar Tamaño</button>
+  </form>
 
-<h3>Gestión de Culturas</h3>
-<form id="formCultura">
-  <input type="text" id="nuevaCultura" placeholder="Nombre de la cultura" required />
-  <button type="submit">Agregar Cultura</button>
-</form>
+  <!-- Tabla para mostrar tamaños -->
+  <table border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Acciones</th><!-- Para editar o eliminar tamaños -->
+      </tr>
+    </thead>
+    <tbody id="tablaTamanios"></tbody>
+  </table>
 
-<table border="1">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody id="tablaCulturas"></tbody>
-</table>
+  <!-- Gestión de culturas -->
+  <h3>Gestión de Culturas</h3>
+  <form id="formCultura">
+    <input type="text" id="nuevaCultura" placeholder="Nombre de la cultura" required />
+    <button type="submit">Agregar Cultura</button>
+  </form>
 
+  <!-- Tabla para mostrar culturas -->
+  <table border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Acciones</th><!-- Para editar o eliminar culturas -->
+      </tr>
+    </thead>
+    <tbody id="tablaCulturas"></tbody>
+  </table>
+
+  <!-- Gestión completa de productos -->
   <h3>Gestión de Productos</h3>
 
   <form id="formProducto">
-  <input type="hidden" id="productoId" />
-    
-<select id="piezas_id" name="piezas_id" required></select> 
-<select id="cultura_id" name="cultura_id" required></select> 
-<select id="tamanio_id" name="tamanio_id" required></select> 
+    <input type="hidden" id="productoId" /><!-- Para editar productos existentes -->
 
-<input type="file" id="imagen" name="imagen" required /> 
-<label for="descripcion">Descripción:</label>
-<textarea id="descripcion" name="descripcion" required></textarea>
-<input type="number" id="precio" name="precio" required />
-<input type="number" id="stock" name="stock" required />
+    <!-- Select para elegir pieza, cultura y tamaño (rellenados dinámicamente) -->
+    <select id="piezas_id" name="piezas_id" required></select> 
+    <select id="cultura_id" name="cultura_id" required></select> 
+    <select id="tamanio_id" name="tamanio_id" required></select> 
 
-    <button type="submit">Guardar Producto</button>
+    <!-- Subir imagen del producto -->
+    <input type="file" id="imagen" name="imagen" required /> 
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" name="descripcion" required></textarea>
+    <input type="number" id="precio" name="precio" required /><!-- Precio del producto -->
+    <input type="number" id="stock" name="stock" required /><!-- Stock disponible -->
+
+    <button type="submit">Guardar Producto</button><!-- Guardar o actualizar producto -->
   </form>
 
+  <!-- Tabla que muestra los productos con sus datos y acciones -->
   <table border="1">
     <thead>
       <tr>
@@ -116,13 +135,14 @@
         <th>Tamaño</th>
         <th>Precio</th>
         <th>Stock</th>
-        <th>Acciones</th>
+        <th>Acciones</th><!-- Editar o eliminar producto -->
       </tr>
     </thead>
     <tbody id="tablaProductos"></tbody>
   </table>
 
   <script>
+    // Mostrar saludo con el nombre y apellido del usuario en localStorage
     const nombre = localStorage.getItem('nombre');
     const apellido = localStorage.getItem('apellido');
     const saludo = document.getElementById('saludo');
@@ -131,13 +151,14 @@
       saludo.textContent = `Bienvenido, ${nombre} ${apellido}`;
     }
 
+    // Evento para cerrar sesión: limpiar localStorage y redirigir al inicio
     document.getElementById('logoutBtn').addEventListener('click', () => {
       localStorage.clear();
       window.location.replace('/index.html');
     });
   </script>
-  
 
+  <!-- Archivo JavaScript externo con la lógica para gestión de productos -->
   <script src="../js/admin_gestion_productos.js"></script>
 </body>
 </html>

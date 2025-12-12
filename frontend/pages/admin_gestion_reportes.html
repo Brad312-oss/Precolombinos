@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Configuración de codificación y diseño responsivo -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- Título de la pestaña del navegador -->
   <title>Reportes - Admin</title>
+  
+  <!-- Enlace a la hoja de estilos CSS para esta página -->
   <link rel="stylesheet" href="../css/admin_gestion_reportes.css" />
 </head>
 <body>
+  <!-- Cabecera con título y navegación principal del panel de administración -->
   <header>
     <h1>Panel de Administración - Usuarios</h1>
     <nav>
+      <!-- Enlaces a diferentes secciones del panel -->
       <a href="admin_dashboard.html">Dashboard</a>
       <a href="admin_gestion_productos.html">Productos</a>
       <a href="admin_gestion_ventas.html">Ventas</a>
       <a href="admin_gestion_usuarios.html">Usuarios</a>
+      <!-- Botón para cerrar sesión -->
       <button id="logoutBtn">Cerrar sesión</button>
     </nav>
   </header>
 
+  <!-- Contenido principal de la página -->
   <main>
     <h2>Reportes del Sistema</h2>
 
+    <!-- Selector para elegir el tipo de reporte a visualizar -->
     <div>
       <label for="tipoReporte">Selecciona tipo de reporte:</label>
       <select id="tipoReporte">
@@ -30,9 +40,11 @@
       </select>
     </div>
 
+    <!-- Sección para el reporte de ventas -->
     <section id="reporteVentas">
       <h3>Reporte de Ventas</h3>
 
+      <!-- Filtros para refinar la búsqueda del reporte de ventas -->
       <div class="filtros-reporte">
         <label>Comprador: <input type="text" id="filtroComprador"></label>
         <label>Cultura: <input type="text" id="filtroCultura"></label>
@@ -47,9 +59,11 @@
         </label>
         <label>Desde: <input type="date" id="fechaInicio"></label>
         <label>Hasta: <input type="date" id="fechaFin"></label>
+        <!-- Botón para aplicar los filtros -->
         <button id="btnFiltrar1">Filtrar</button>
       </div>
 
+      <!-- Tabla que mostrará los resultados del reporte de ventas filtrado -->
       <table>
         <thead>
           <tr>
@@ -61,11 +75,12 @@
             <th>Productos</th>
           </tr>
         </thead>
-        <tbody id="tablaReporteVentas"></tbody>
+        <tbody id="tablaReporteVentas"></tbody> <!-- Aquí se inyectarán las filas dinámicamente -->
       </table>
 
       <h4>Comparar con otro reporte</h4>
 
+      <!-- Segundo conjunto de filtros para comparar reportes de ventas -->
       <div class="filtros-reporte">
         <label>Comprador: <input type="text" id="filtroComprador2"></label>
         <label>Cultura: <input type="text" id="filtroCultura2"></label>
@@ -83,6 +98,7 @@
         <button id="btnFiltrar2">Filtrar</button>
       </div>
 
+      <!-- Segunda tabla para mostrar el segundo reporte de ventas para comparación -->
       <table>
         <thead>
           <tr>
@@ -98,86 +114,101 @@
       </table>
     </section>
 
+    <!-- Sección para el reporte de usuarios, inicialmente oculta -->
     <section id="reporteUsuarios" style="display: none;">
-  <h3>Reporte de Usuarios</h3>
+      <h3>Reporte de Usuarios</h3>
 
-  <section class="filtros">
-    <label>Desde: <input type="date" id="fechaInicioUsuarios"></label>
-    <label>Hasta: <input type="date" id="fechaFinUsuarios"></label>
-    <button id="btnFiltrarUsuarios">Generar Reporte</button>
-  </section>
+      <!-- Filtros de fechas para generar el reporte de usuarios -->
+      <section class="filtros">
+        <label>Desde: <input type="date" id="fechaInicioUsuarios"></label>
+        <label>Hasta: <input type="date" id="fechaFinUsuarios"></label>
+        <button id="btnFiltrarUsuarios">Generar Reporte</button>
+      </section>
 
-  <section id="resumenUsuarios">
-    <p>Total nuevos: <span id="totalNuevos">-</span></p>
-    <p>Total baneados: <span id="totalBaneados">-</span></p>
-    <div id="resumenPorRol">
-    </div>
-  </section>
+      <!-- Resumen estadístico del reporte de usuarios -->
+      <section id="resumenUsuarios">
+        <p>Total nuevos: <span id="totalNuevos">-</span></p>
+        <p>Total baneados: <span id="totalBaneados">-</span></p>
+        <div id="resumenPorRol"></div> <!-- Resumen por roles de usuario -->
+      </section>
 
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Correo</th>
-        <th>Rol</th>
-        <th>Estado</th>
-        <th>Registro</th>
-        <th>Último Login</th>
-      </tr>
-    </thead>
-    <tbody id="tablaUsuariosReporte"></tbody>
-  </table>
-</section>
+      <!-- Tabla con detalles de los usuarios en el reporte -->
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th>Registro</th>
+            <th>Último Login</th>
+          </tr>
+        </thead>
+        <tbody id="tablaUsuariosReporte"></tbody>
+      </table>
+    </section>
 
+    <!-- Sección para el reporte de productos, inicialmente oculta -->
     <div id="reporteProductos" style="display: none;">
-  <h2>📦 Reporte de Productos</h2>
-  <button id="btnGenerarReporteProductos">Generar reporte de productos</button>
-  <table border="1">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Stock</th>
-        <th>Precio</th>
-        <th>Estado</th>
-        <th>Último admin que modificó</th>
-        <th>Última modificación</th>
-      </tr>
-    </thead>
-    <tbody id="tablaReporteProductos"></tbody>
-  </table>
-</div>
+      <h2>📦 Reporte de Productos</h2>
+      <!-- Botón para generar el reporte de productos -->
+      <button id="btnGenerarReporteProductos">Generar reporte de productos</button>
+      
+      <!-- Tabla con los detalles de productos -->
+      <table border="1">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Stock</th>
+            <th>Precio</th>
+            <th>Estado</th>
+            <th>Último admin que modificó</th>
+            <th>Última modificación</th>
+          </tr>
+        </thead>
+        <tbody id="tablaReporteProductos"></tbody>
+      </table>
+    </div>
   </main>
 
+  <!-- Script para validar sesión y permisos de usuario al cargar la página -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Obtener usuario almacenado en localStorage
       const usuarioRaw = localStorage.getItem('usuario');
+      // Si no hay usuario, redirigir a la página de inicio
       if (!usuarioRaw) return location.href = '/index.html';
+      // Parsear usuario y validar que tenga rol de administrador (id_rol = 3)
       const usuario = JSON.parse(usuarioRaw);
       if (usuario.id_rol !== 3) return location.href = '/index.html';
     });
   </script>
 
+  <!-- Script para cerrar sesión y limpiar localStorage -->
   <script>
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
       logoutBtn.addEventListener('click', () => {
-        localStorage.clear();
-        window.location.replace('/index.html');
+        localStorage.clear(); // Limpiar datos de sesión
+        window.location.replace('/index.html'); // Redirigir al inicio
       });
     }
   </script>
 
+  <!-- Script para cambiar entre los diferentes tipos de reportes visibles -->
   <script>
     document.getElementById('tipoReporte').addEventListener('change', e => {
       const tipo = e.target.value;
+      // Mostrar solo la sección correspondiente según selección
       document.getElementById('reporteVentas').style.display = tipo === 'ventas' ? 'block' : 'none';
       document.getElementById('reporteUsuarios').style.display = tipo === 'usuarios' ? 'block' : 'none';
       document.getElementById('reporteProductos').style.display = tipo === 'productos' ? 'block' : 'none';
     });
   </script>
 
+  <!-- Script externo que contiene la lógica adicional para la gestión de reportes -->
   <script src="../js/admin_gestion_reportes.js"></script>
 </body>
 </html>

@@ -1,47 +1,61 @@
 import pool from '../config/db.js';
 
+// Función para crear una nueva venta
 export const crearVenta = async (req, res) => {
+  // Verifica que el usuario esté autenticado y que el ID sea válido
   if (!req.usuario || !req.usuario.id || isNaN(req.usuario.id)) {
     return res.status(401).json({ message: 'Token inválido o usuario no autenticado' });
   }
 
   console.log('BODY RECIBIDO EN /api/ventas:', req.body);
+
+  // Extrae los datos necesarios del cuerpo de la solicitud
   const { fecha, total, tipo_pago, productos } = req.body;
 
+  // Define el usuario_id basado en el rol y posible usuario enviado
   const usuario_id = req.usuario.id_rol === 3 && req.body.usuario_id
     ? req.body.usuario_id
     : req.usuario.id;
 
+  // Valida que el usuario_id sea válido
   if (!usuario_id || isNaN(usuario_id)) {
     return res.status(400).json({ message: 'ID de usuario inválido' });
   }
 
+  // Verifica que se haya enviado al menos un producto en la venta
   if (!Array.isArray(productos) || productos.length === 0) {
     return res.status(400).json({ message: 'Debe enviar al menos un producto' });
   }
 
+  // Valida la estructura de cada producto recibido
   for (const p of productos) {
     if (!p.producto_id || isNaN(p.producto_id) || !p.cantidad || isNaN(p.cantidad)) {
       return res.status(400).json({ message: 'Producto mal formado' });
     }
   }
 
+  // Obtiene una conexión a la base de datos para realizar transacciones
   const connection = await pool.getConnection();
   try {
+    // Inicia una transacción para asegurar la atomicidad
     await connection.beginTransaction();
 
+    // Para cada producto verifica stock disponible y actualiza el stock
     for (const producto of productos) {
       const [rows] = await connection.query(
         'SELECT stock FROM productos WHERE producto_id = ? FOR UPDATE',
         [producto.producto_id]
       );
 
+      // Si el producto no existe, cancela la transacción y devuelve error
       if (rows.length === 0) {
         await connection.rollback();
         return res.status(404).json({ message: `Producto ID ${producto.producto_id} no encontrado` });
       }
 
       const stockDisponible = rows[0].stock;
+
+      // Verifica que haya suficiente stock para la cantidad solicitada
       if (producto.cantidad > stockDisponible) {
         await connection.rollback();
         return res.status(400).json({
@@ -49,18 +63,21 @@ export const crearVenta = async (req, res) => {
         });
       }
 
+      // Actualiza el stock restando la cantidad vendida
       await connection.query(
         'UPDATE productos SET stock = stock - ? WHERE producto_id = ?',
         [producto.cantidad, producto.producto_id]
       );
     }
 
+    // Inserta la venta en la tabla ventas y obtiene el ID generado
     const [ventaResult] = await connection.query(
       'INSERT INTO ventas (usuario_id, fecha, total, tipo_pago) VALUES (?, ?, ?, ?)',
       [usuario_id, fecha, total, tipo_pago]
     );
     const ventaId = ventaResult.insertId;
 
+    // Inserta el detalle de la venta para cada producto (cantidad, subtotal)
     for (const producto of productos) {
       const [rowsPrecio] = await connection.query(
         'SELECT precio FROM productos WHERE producto_id = ?',
@@ -75,8 +92,10 @@ export const crearVenta = async (req, res) => {
       );
     }
 
+    // Confirma la transacción (commit)
     await connection.commit();
 
+    // Obtiene los detalles completos para devolver en la respuesta
     const [detalles] = await pool.query(`
       SELECT 
       p.producto_id,
@@ -94,6 +113,7 @@ export const crearVenta = async (req, res) => {
       WHERE dv.venta_id = ?
     `, [ventaId]);
 
+    // Responde que la venta fue creada con éxito y los detalles
     res.status(201).json({
       message: 'Venta registrada correctamente',
       tipo_pago,
@@ -102,19 +122,23 @@ export const crearVenta = async (req, res) => {
     });
 
   } catch (error) {
+    // En caso de error, revierte la transacción y responde con error
     await connection.rollback();
     console.error('Error al registrar venta:', error);
     res.status(500).json({ message: 'Error al registrar la venta' });
   } finally {
+    // Libera la conexión siempre, exitoso o no
     connection.release();
   }
 };
 
+// Función para listar ventas, con opción de filtrar detalles por ID de venta
 export async function listarVentasConDetalles(req, res) {
   try {
     const { id } = req.query;
 
     if (id) {
+      // Si se proporciona id, obtiene detalles específicos de esa venta
       const [detalles] = await pool.query(`
         SELECT dv.*, pi.nombre_pieza AS nombre_producto
         FROM detalle_de_venta dv
@@ -125,6 +149,7 @@ export async function listarVentasConDetalles(req, res) {
       return res.json(detalles);
     }
 
+    // Si no se proporciona id, lista todas las ventas con información del cliente
     const [ventas] = await pool.query(`
       SELECT v.venta_id AS venta_id, u.nombre AS nombre_cliente, v.fecha, v.estado, v.total
       FROM ventas v
@@ -138,22 +163,27 @@ export async function listarVentasConDetalles(req, res) {
   }
 }
 
+// Alias para la función crearVenta
 export const registrarVenta = crearVenta;
 
+// Función para actualizar el estado de una venta específica
 export const actualizarEstadoVenta = async (req, res) => {
   const { venta_id } = req.params;
   const { estado } = req.body;
 
+  // Valida que el estado recibido sea uno válido
   if (!['en proceso', 'entregada', 'cancelada'].includes(estado)) {
     return res.status(400).json({ message: 'Estado inválido' });
   }
 
   try {
+    // Actualiza el estado en la base de datos
     const [result] = await pool.query(
       'UPDATE ventas SET estado = ? WHERE venta_id = ?',
       [estado, venta_id]
     );
 
+    // Si no se afectó ninguna fila, la venta no existe
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: 'Venta no encontrada' });
     }
@@ -165,8 +195,10 @@ export const actualizarEstadoVenta = async (req, res) => {
   }
 };
 
+// Función para obtener todas las ventas con información resumida
 export const obtenerVentas = async (req, res) => {
   try {
+    // Consulta las ventas ordenadas por fecha descendente
     const [ventas] = await pool.query(`
       SELECT v.venta_id, u.nombre AS nombre_cliente, v.fecha, v.total, v.estado
       FROM ventas v
@@ -181,6 +213,7 @@ export const obtenerVentas = async (req, res) => {
   }
 };
 
+// Función para generar un reporte filtrado por varios parámetros
 export const generarReporteFiltrado = async (req, res) => {
   try {
     const {
@@ -192,6 +225,7 @@ export const generarReporteFiltrado = async (req, res) => {
       fechaFin
     } = req.query;
 
+    // Consulta base con joins para obtener toda la información necesaria
     let query = `
       SELECT 
         v.venta_id,
@@ -215,6 +249,7 @@ export const generarReporteFiltrado = async (req, res) => {
 
     const params = [];
 
+    // Agrega condiciones según los filtros enviados
     if (comprador) {
       query += ` AND CONCAT(u.nombre, ' ', u.apellido) LIKE ?`;
       params.push(`%${comprador}%`);
@@ -242,6 +277,7 @@ export const generarReporteFiltrado = async (req, res) => {
 
     query += ` ORDER BY v.fecha DESC`;
 
+    // Ejecuta la consulta con los parámetros acumulados
     const [filtrado] = await pool.query(query, params);
     res.json(filtrado);
   } catch (error) {

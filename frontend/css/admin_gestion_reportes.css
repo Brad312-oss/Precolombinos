@@ -1,181 +1,200 @@
-/* frontend/css/style.css */
-
+/* Definición de variables globales de color */
 :root {
-  --bg-color: #0e0e0e;
-  --text-color: #f5f5f5;
-  --accent-color: #d4af37;
-  --accent-hover: #c49b27;
-  --border-color: #333;
-  --table-header-bg: #1c1c1c;
-  --table-row-hover: #222;
+  --bg-color: #0e0e0e; /* Fondo oscuro */
+  --text-color: #f5f5f5; /* Color de texto claro */
+  --accent-color: #d4af37; /* Color de acento (dorado) */
+  --accent-hover: #c49b27; /* Color de acento al pasar el ratón */
+  --border-color: #333; /* Color de borde gris oscuro */
+  --table-header-bg: #1c1c1c; /* Fondo del encabezado de la tabla */
+  --table-row-hover: #222; /* Color de fondo de fila al pasar el ratón */
 }
 
+/* Estilos generales para el cuerpo de la página */
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  padding: 1rem;
+  margin: 0; /* Eliminar márgenes por defecto */
+  font-family: 'Segoe UI', sans-serif; /* Establecer fuente para el cuerpo */
+  background-color: var(--bg-color); /* Fondo oscuro */
+  color: var(--text-color); /* Texto claro */
+  padding: 1rem; /* Espaciado interno */
 }
 
+/* Estilos para el encabezado */
 header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #000;
-  padding: 1rem;
-  border-bottom: 2px solid var(--accent-color);
+  display: flex; /* Usar Flexbox para organizar los elementos */
+  flex-direction: column; /* Colocar los elementos en una columna */
+  align-items: center; /* Centrar los elementos horizontalmente */
+  background-color: #000; /* Fondo negro para el encabezado */
+  padding: 1rem; /* Espaciado interno */
+  border-bottom: 2px solid var(--accent-color); /* Borde inferior dorado */
 }
 
+/* Estilo para el título dentro del encabezado */
 header h1 {
-  margin: 0.5rem 0;
-  font-size: 1.8rem;
-  color: var(--accent-color);
+  margin: 0.5rem 0; /* Espacio arriba y abajo del título */
+  font-size: 1.8rem; /* Tamaño de la fuente */
+  color: var(--accent-color); /* Color dorado para el título */
 }
 
+/* Estilos para la barra de navegación en el encabezado */
 header nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
+  display: flex; /* Usar Flexbox para los elementos del menú */
+  flex-wrap: wrap; /* Permitir que los elementos se envuelvan si es necesario */
+  justify-content: center; /* Centrar los elementos del menú */
+  gap: 1rem; /* Espacio entre los elementos */
+  margin-top: 1rem; /* Espacio superior */
 }
 
+/* Estilos para los enlaces y botones de navegación */
 header nav a,
 header nav button {
-  background-color: transparent;
-  color: var(--text-color);
-  border: 1px solid var(--accent-color);
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  transition: 0.3s;
-  border-radius: 8px;
-  cursor: pointer;
+  background-color: transparent; /* Fondo transparente */
+  color: var(--text-color); /* Texto claro */
+  border: 1px solid var(--accent-color); /* Borde dorado */
+  padding: 0.5rem 1rem; /* Espaciado interno */
+  text-decoration: none; /* Eliminar subrayado de los enlaces */
+  transition: 0.3s; /* Transición suave al cambiar el estado */
+  border-radius: 8px; /* Bordes redondeados */
+  cursor: pointer; /* Cambiar el cursor a puntero */
 }
 
+/* Estilos para el estado de hover (cuando el ratón pasa por encima) de enlaces y botones */
 header nav a:hover,
 header nav button:hover {
-  background-color: var(--accent-hover);
-  color: #000;
+  background-color: var(--accent-hover); /* Fondo al pasar el ratón */
+  color: #000; /* Cambiar el color del texto a negro */
 }
 
+/* Estilos para el contenido principal */
 main {
-  max-width: 1200px;
-  margin: auto;
+  max-width: 1200px; /* Ancho máximo del contenedor principal */
+  margin: auto; /* Centrar el contenido */
 }
 
+/* Estilos para los encabezados h2, h3 y h4 */
 h2, h3, h4 {
-  color: var(--accent-color);
-  margin-top: 2rem;
+  color: var(--accent-color); /* Color dorado para los encabezados */
+  margin-top: 2rem; /* Espacio arriba de los encabezados */
 }
 
+/* Estilos para los campos de entrada de texto, select y date */
 select, input[type="text"], input[type="date"] {
-  background-color: #1a1a1a;
-  border: 1px solid var(--accent-color);
-  color: var(--text-color);
-  padding: 0.5rem;
-  border-radius: 6px;
+  background-color: #1a1a1a; /* Fondo oscuro */
+  border: 1px solid var(--accent-color); /* Borde dorado */
+  color: var(--text-color); /* Texto claro */
+  padding: 0.5rem; /* Espaciado interno */
+  border-radius: 6px; /* Bordes redondeados */
 }
 
+/* Estilos para los botones */
 button {
-  background-color: var(--accent-color);
-  color: #000;
-  border: none;
-  padding: 0.5rem 1rem;
-  margin-top: 0.5rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
+  background-color: var(--accent-color); /* Fondo dorado */
+  color: #000; /* Texto negro */
+  border: none; /* Sin borde */
+  padding: 0.5rem 1rem; /* Espaciado interno */
+  margin-top: 0.5rem; /* Espacio superior */
+  border-radius: 6px; /* Bordes redondeados */
+  cursor: pointer; /* Cambiar el cursor a puntero */
+  transition: 0.3s; /* Transición suave */
 }
 
+/* Estilos para el hover de los botones */
 button:hover {
-  background-color: var(--accent-hover);
+  background-color: var(--accent-hover); /* Fondo al pasar el ratón */
 }
 
+/* Estilos para los contenedores de filtros (reportes y generales) */
 .filtros-reporte,
 .filtros {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin: 1rem 0;
-  align-items: center;
+  display: flex; /* Usar Flexbox para los filtros */
+  flex-wrap: wrap; /* Permitir que los filtros se ajusten a la siguiente línea */
+  gap: 1rem; /* Espacio entre los elementos */
+  margin: 1rem 0; /* Espacio arriba y abajo */
+  align-items: center; /* Alinear los filtros al centro */
 }
 
+/* Estilos para las etiquetas de los filtros */
 .filtros-reporte label,
 .filtros label {
-  display: flex;
-  flex-direction: column;
-  color: var(--text-color);
+  display: flex; /* Usar Flexbox para las etiquetas */
+  flex-direction: column; /* Colocar el texto de la etiqueta arriba del campo */
+  color: var(--text-color); /* Color de texto claro */
 }
 
+/* Estilos para las tablas */
 table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-  background-color: #1a1a1a;
-  border: 1px solid var(--border-color);
+  width: 100%; /* La tabla ocupa todo el ancho disponible */
+  border-collapse: collapse; /* Eliminar espacio entre celdas */
+  margin-top: 1rem; /* Espacio superior */
+  background-color: #1a1a1a; /* Fondo oscuro */
+  border: 1px solid var(--border-color); /* Borde gris oscuro */
 }
 
+/* Estilos para las celdas de la tabla */
 table th,
 table td {
-  padding: 0.75rem;
-  border: 1px solid var(--border-color);
-  text-align: left;
+  padding: 0.75rem; /* Espaciado interno */
+  border: 1px solid var(--border-color); /* Borde gris oscuro */
+  text-align: left; /* Alinear el texto a la izquierda */
 }
 
+/* Estilos para el encabezado de la tabla */
 table thead {
-  background-color: var(--table-header-bg);
+  background-color: var(--table-header-bg); /* Fondo oscuro para los encabezados */
 }
 
+/* Estilos para el hover de las filas de la tabla */
 table tbody tr:hover {
-  background-color: var(--table-row-hover);
+  background-color: var(--table-row-hover); /* Fondo al pasar el ratón sobre las filas */
 }
 
+/* Estilos para el resumen por rol */
 #resumenPorRol p {
-  margin: 0.3rem 0;
+  margin: 0.3rem 0; /* Espacio arriba y abajo del párrafo */
 }
 
+/* Estilos responsivos para tablets (pantallas con un máximo de 768px) */
 @media (max-width: 768px) {
   header nav {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; /* Colocar los elementos de navegación en columna */
+    align-items: center; /* Centrar los elementos */
   }
 
   .filtros-reporte,
   .filtros {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: column; /* Colocar los filtros en columna */
+    align-items: stretch; /* Estirar los elementos para ocupar todo el ancho */
   }
 
   select, input[type="text"], input[type="date"], button {
-    width: 100%;
+    width: 100%; /* Hacer los campos y botones de ancho completo */
   }
 }
 
+/* Estilos responsivos para móviles (pantallas con un máximo de 480px) */
 @media (max-width: 480px) {
   body {
-    padding: 0.5rem;
+    padding: 0.5rem; /* Reducir el padding en dispositivos pequeños */
   }
 
   h2, h3 {
-    font-size: 1.2rem;
+    font-size: 1.2rem; /* Reducir el tamaño de los encabezados */
   }
 
   header h1 {
-    font-size: 1.4rem;
-    text-align: center;
+    font-size: 1.4rem; /* Reducir el tamaño del título del encabezado */
+    text-align: center; /* Centrar el título */
   }
 
   table th,
   table td {
-    font-size: 0.85rem;
-    padding: 0.5rem;
+    font-size: 0.85rem; /* Reducir el tamaño de la fuente en las celdas */
+    padding: 0.5rem; /* Reducir el padding en las celdas */
   }
 
   nav a,
   nav button {
-    font-size: 0.9rem;
-    width: 100%;
-    text-align: center;
+    font-size: 0.9rem; /* Reducir el tamaño de fuente de los enlaces y botones */
+    width: 100%; /* Hacer que los enlaces y botones ocupen todo el ancho */
+    text-align: center; /* Centrar el texto */
   }
 }

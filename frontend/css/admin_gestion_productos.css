@@ -1,171 +1,183 @@
-/* General */
+/* Estilos generales para la página */
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #000;
-  color: #ffd700;
-  padding: 20px;
-  box-sizing: border-box;
+  margin: 0; /* Eliminar márgenes por defecto */
+  font-family: 'Segoe UI', sans-serif; /* Establecer la fuente para todo el cuerpo */
+  background-color: #000; /* Fondo negro */
+  color: #ffd700; /* Color de texto dorado */
+  padding: 20px; /* Espaciado interno en todo el cuerpo */
+  box-sizing: border-box; /* Incluir padding y border en el tamaño total del elemento */
 }
 
-/* Header y navegación */
+/* Estilos para el encabezado y la navegación */
 header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 30px;
-  border-bottom: 2px solid #ffd700;
-  padding-bottom: 10px;
+  display: flex; /* Usar Flexbox para distribuir los elementos en el encabezado */
+  flex-wrap: wrap; /* Permitir que los elementos se envuelvan si es necesario */
+  justify-content: space-between; /* Espaciar los elementos a ambos extremos */
+  align-items: center; /* Alinear verticalmente los elementos al centro */
+  gap: 15px; /* Espacio entre los elementos */
+  margin-bottom: 30px; /* Espacio inferior */
+  border-bottom: 2px solid #ffd700; /* Borde inferior dorado */
+  padding-bottom: 10px; /* Espacio debajo del contenido */
 }
 
+/* Estilo para la imagen dentro del encabezado */
 header img {
-  height: 60px;
+  height: 60px; /* Altura fija para la imagen */
 }
 
+/* Estilo para el título principal del encabezado */
 header h1 {
-  font-size: 1.6rem;
-  margin: 0;
+  font-size: 1.6rem; /* Tamaño de la fuente */
+  margin: 0; /* Eliminar márgenes por defecto */
 }
 
+/* Estilos para el contenedor de navegación */
 nav {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
+  display: flex; /* Usar Flexbox para distribuir los elementos dentro del nav */
+  gap: 15px; /* Espacio entre los enlaces */
+  flex-wrap: wrap; /* Permitir que los enlaces se ajusten a la siguiente línea */
 }
 
+/* Estilos para los enlaces de navegación y el botón de logout */
 nav a,
 #logoutBtn {
-  background-color: #111;
-  color: #ffd700;
-  text-decoration: none;
-  padding: 8px 16px;
-  border: 1px solid #ffd700;
-  border-radius: 5px;
-  font-weight: bold;
-  transition: 0.3s ease;
+  background-color: #111; /* Fondo oscuro */
+  color: #ffd700; /* Texto dorado */
+  text-decoration: none; /* Eliminar subrayado */
+  padding: 8px 16px; /* Espaciado interno (padding) */
+  border: 1px solid #ffd700; /* Borde dorado */
+  border-radius: 5px; /* Bordes redondeados */
+  font-weight: bold; /* Texto en negrita */
+  transition: 0.3s ease; /* Transición suave para los cambios */
 }
 
+/* Estilos para cuando el ratón pasa sobre los enlaces o el botón */
 nav a:hover,
 #logoutBtn:hover {
-  background-color: #ffd700;
-  color: #000;
-  cursor: pointer;
+  background-color: #ffd700; /* Fondo dorado */
+  color: #000; /* Texto negro */
+  cursor: pointer; /* Cambiar el cursor */
 }
 
-/* Formularios */
+/* Estilos para los formularios */
 form {
-  background-color: #111;
-  padding: 15px;
-  margin: 20px 0;
-  border-radius: 8px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  align-items: center;
+  background-color: #111; /* Fondo oscuro */
+  padding: 15px; /* Espaciado interno */
+  margin: 20px 0; /* Espacio arriba y abajo */
+  border-radius: 8px; /* Bordes redondeados */
+  display: flex; /* Usar Flexbox para organizar los elementos */
+  flex-wrap: wrap; /* Permitir que los elementos se ajusten a la siguiente línea */
+  gap: 15px; /* Espacio entre los elementos */
+  align-items: center; /* Alinear los elementos verticalmente */
 }
 
+/* Estilos comunes para los campos de entrada y botones del formulario */
 form input,
 form select,
 form textarea,
 form button {
-  padding: 8px;
-  border: 1px solid #ffd700;
-  border-radius: 5px;
-  background-color: #000;
-  color: #ffd700;
-  font-family: inherit;
-  flex: 1 1 200px;
+  padding: 8px; /* Espaciado interno */
+  border: 1px solid #ffd700; /* Borde dorado */
+  border-radius: 5px; /* Bordes redondeados */
+  background-color: #000; /* Fondo negro */
+  color: #ffd700; /* Texto dorado */
+  font-family: inherit; /* Heredar la fuente del elemento contenedor */
+  flex: 1 1 200px; /* Hacer que los campos se adapten y tengan un tamaño mínimo */
 }
 
+/* Estilos para el botón dentro de los formularios */
 form button {
-  background-color: #ffd700;
-  color: #000;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s ease;
+  background-color: #ffd700; /* Fondo dorado */
+  color: #000; /* Texto negro */
+  font-weight: bold; /* Texto en negrita */
+  cursor: pointer; /* Cambiar el cursor */
+  transition: 0.3s ease; /* Transición suave */
 }
 
+/* Estilo para el hover del botón */
 form button:hover {
-  background-color: #e6c200;
+  background-color: #e6c200; /* Fondo amarillo cuando se pasa el ratón */
 }
 
-/* Tablas */
+/* Estilos para las tablas */
 table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 40px;
+  width: 100%; /* La tabla ocupa todo el ancho disponible */
+  border-collapse: collapse; /* Eliminar el espacio entre las celdas */
+  margin-bottom: 40px; /* Espacio debajo de la tabla */
 }
 
+/* Estilos para las celdas de la tabla */
 table th,
 table td {
-  border: 1px solid #ffd700;
-  padding: 10px;
-  text-align: center;
+  border: 1px solid #ffd700; /* Borde dorado */
+  padding: 10px; /* Espaciado interno */
+  text-align: center; /* Centrar el contenido de las celdas */
 }
 
+/* Estilo para los encabezados de las tablas */
 table th {
-  background-color: #111;
+  background-color: #111; /* Fondo oscuro para los encabezados */
 }
 
+/* Estilos para los botones de acción (editar, eliminar) dentro de la tabla */
 button.editar,
 button.eliminar,
 button.eliminarPieza,
 button.eliminarCultura,
 button.eliminarTamanio {
-  background: none;
-  border: none;
-  color: #ffd700;
-  font-size: 1.2rem;
-  cursor: pointer;
+  background: none; /* Sin fondo */
+  border: none; /* Sin borde */
+  color: #ffd700; /* Texto dorado */
+  font-size: 1.2rem; /* Tamaño de fuente mayor */
+  cursor: pointer; /* Cambiar el cursor */
 }
 
+/* Estilo para el hover de los botones de acción */
 button:hover {
-  color: #e6c200;
+  color: #e6c200; /* Cambiar el color a amarillo cuando el ratón pasa por encima */
 }
 
-/* Responsive - Tablets */
+/* Estilos responsivos para tablets (pantallas con un máximo de 768px) */
 @media (max-width: 768px) {
   header {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: column; /* Organizar los elementos en una columna */
+    align-items: flex-start; /* Alinear a la izquierda */
   }
 
   nav {
-    flex-direction: column;
-    width: 100%;
+    flex-direction: column; /* Colocar los enlaces de navegación en columna */
+    width: 100%; /* Ancho completo */
   }
 
   form {
-    flex-direction: column;
+    flex-direction: column; /* Organizar los campos del formulario en columna */
   }
 
   form input,
   form select,
   form textarea,
   form button {
-    width: 100%;
+    width: 100%; /* Hacer los campos de entrada y botón de ancho completo */
   }
 }
 
-/* Responsive - Móviles */
+/* Estilos responsivos para móviles (pantallas con un máximo de 480px) */
 @media (max-width: 480px) {
   header h1 {
-    font-size: 1.3rem;
-    text-align: center;
-    width: 100%;
+    font-size: 1.3rem; /* Reducir el tamaño del título */
+    text-align: center; /* Centrar el título */
+    width: 100%; /* Ancho completo */
   }
 
   table th,
   table td {
-    font-size: 0.9rem;
-    padding: 6px;
+    font-size: 0.9rem; /* Reducir el tamaño de la fuente en las celdas */
+    padding: 6px; /* Reducir el padding en las celdas */
   }
 
   nav a,
   #logoutBtn {
-    width: 100%;
-    text-align: center;
+    width: 100%; /* Hacer que los enlaces y el botón de logout ocupen todo el ancho */
+    text-align: center; /* Centrar el texto de los enlaces */
   }
 }

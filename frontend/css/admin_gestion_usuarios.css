@@ -1,148 +1,164 @@
+/* Definición de variables globales de color */
 :root {
-  --bg-color: #0f0f0f;
-  --text-color: #f5f5f5;
-  --accent-color: #d4af37;
-  --accent-hover: #c49b27;
-  --border-color: #444;
-  --table-bg: #1a1a1a;
-  --table-header: #222;
-  --table-hover: #2a2a2a;
+  --bg-color: #0f0f0f; /* Color de fondo oscuro */
+  --text-color: #f5f5f5; /* Color del texto claro */
+  --accent-color: #d4af37; /* Color de acento dorado */
+  --accent-hover: #c49b27; /* Color de acento al pasar el ratón */
+  --border-color: #444; /* Color de borde gris oscuro */
+  --table-bg: #1a1a1a; /* Fondo de las tablas */
+  --table-header: #222; /* Fondo de los encabezados de las tablas */
+  --table-hover: #2a2a2a; /* Fondo de las filas de la tabla al pasar el ratón */
 }
 
+/* Estilos generales para el cuerpo de la página */
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  padding: 1rem;
+  margin: 0; /* Eliminar márgenes por defecto */
+  font-family: 'Segoe UI', sans-serif; /* Establecer la fuente para el cuerpo */
+  background-color: var(--bg-color); /* Fondo oscuro */
+  color: var(--text-color); /* Texto claro */
+  padding: 1rem; /* Espaciado interno */
 }
 
+/* Estilos para el encabezado */
 header {
-  background-color: #000;
-  border-bottom: 2px solid var(--accent-color);
-  padding: 1rem;
-  text-align: center;
+  background-color: #000; /* Fondo negro para el encabezado */
+  border-bottom: 2px solid var(--accent-color); /* Borde dorado inferior */
+  padding: 1rem; /* Espaciado interno */
+  text-align: center; /* Centrar el texto en el encabezado */
 }
 
+/* Estilos para el título dentro del encabezado */
 header h1 {
-  margin: 0.5rem 0;
-  font-size: 1.8rem;
-  color: var(--accent-color);
+  margin: 0.5rem 0; /* Espaciado arriba y abajo */
+  font-size: 1.8rem; /* Tamaño del texto */
+  color: var(--accent-color); /* Color dorado */
 }
 
+/* Estilos para la barra de navegación del encabezado */
 header nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-top: 1rem;
+  display: flex; /* Usar Flexbox para los elementos del menú */
+  flex-wrap: wrap; /* Permitir que los elementos se ajusten si es necesario */
+  justify-content: center; /* Centrar los elementos del menú */
+  gap: 0.75rem; /* Espacio entre los elementos */
+  margin-top: 1rem; /* Espacio superior */
 }
 
+/* Estilos para los enlaces y botones de la barra de navegación */
 header nav a,
 header nav button {
-  background-color: transparent;
-  color: var(--text-color);
-  border: 1px solid var(--accent-color);
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  transition: background-color 0.3s;
-  border-radius: 6px;
-  cursor: pointer;
+  background-color: transparent; /* Fondo transparente */
+  color: var(--text-color); /* Texto claro */
+  border: 1px solid var(--accent-color); /* Borde dorado */
+  padding: 0.5rem 1rem; /* Espaciado interno */
+  text-decoration: none; /* Eliminar subrayado de los enlaces */
+  transition: background-color 0.3s; /* Transición suave para el fondo */
+  border-radius: 6px; /* Bordes redondeados */
+  cursor: pointer; /* Cambiar el cursor a puntero */
 }
 
+/* Estilos para el hover (cuando el ratón pasa por encima) de enlaces y botones */
 header nav a:hover,
 header nav button:hover {
-  background-color: var(--accent-hover);
-  color: #000;
+  background-color: var(--accent-hover); /* Fondo al pasar el ratón */
+  color: #000; /* Texto negro */
 }
 
+/* Estilos para el contenido principal */
 main {
-  max-width: 1200px;
-  margin: auto;
-  padding: 1rem;
+  max-width: 1200px; /* Ancho máximo */
+  margin: auto; /* Centrar el contenido */
+  padding: 1rem; /* Espaciado interno */
 }
 
+/* Estilos para la tabla */
 table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: var(--table-bg);
-  margin-top: 1.5rem;
-  border: 1px solid var(--border-color);
+  width: 100%; /* La tabla ocupa todo el ancho disponible */
+  border-collapse: collapse; /* Eliminar el espacio entre las celdas */
+  background-color: var(--table-bg); /* Fondo oscuro para la tabla */
+  margin-top: 1.5rem; /* Espacio superior */
+  border: 1px solid var(--border-color); /* Borde gris oscuro */
 }
 
+/* Estilos para las celdas de la tabla */
 table th,
 table td {
-  padding: 0.75rem;
-  border: 1px solid var(--border-color);
-  text-align: left;
-  font-size: 0.95rem;
+  padding: 0.75rem; /* Espaciado interno */
+  border: 1px solid var(--border-color); /* Borde gris oscuro */
+  text-align: left; /* Alinear el texto a la izquierda */
+  font-size: 0.95rem; /* Tamaño de la fuente */
 }
 
+/* Estilos para los encabezados de la tabla */
 table th {
-  background-color: var(--table-header);
-  color: var(--accent-color);
+  background-color: var(--table-header); /* Fondo oscuro para los encabezados */
+  color: var(--accent-color); /* Color dorado para el texto del encabezado */
 }
 
+/* Estilos para las filas de la tabla al pasar el ratón */
 table tbody tr:hover {
-  background-color: var(--table-hover);
+  background-color: var(--table-hover); /* Fondo al pasar el ratón sobre las filas */
 }
 
+/* Estilos generales para los botones */
 button {
-  background-color: var(--accent-color);
-  color: #000;
-  border: none;
-  padding: 0.4rem 0.8rem;
-  margin: 0.15rem;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition: 0.3s ease;
+  background-color: var(--accent-color); /* Fondo dorado */
+  color: #000; /* Texto negro */
+  border: none; /* Sin borde */
+  padding: 0.4rem 0.8rem; /* Espaciado interno */
+  margin: 0.15rem; /* Espacio entre los botones */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambiar el cursor a puntero */
+  font-size: 0.85rem; /* Tamaño de la fuente */
+  transition: 0.3s ease; /* Transición suave */
 }
 
+/* Estilos para el hover de los botones */
 button:hover {
-  background-color: var(--accent-hover);
+  background-color: var(--accent-hover); /* Fondo al pasar el ratón */
 }
 
+/* Estilos responsivos para tablets (pantallas de hasta 768px de ancho) */
 @media (max-width: 768px) {
   header nav {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; /* Colocar los elementos de navegación en columna */
+    align-items: center; /* Centrar los elementos */
   }
 
   header nav a,
   header nav button {
-    width: 100%;
-    text-align: center;
+    width: 100%; /* Hacer los enlaces y botones de ancho completo */
+    text-align: center; /* Centrar el texto */
   }
 
   table th,
   table td {
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* Reducir el tamaño de la fuente en las tablas */
   }
 
   button {
-    padding: 0.4rem;
-    font-size: 0.8rem;
+    padding: 0.4rem; /* Reducir el padding de los botones */
+    font-size: 0.8rem; /* Reducir el tamaño de la fuente en los botones */
   }
 }
 
+/* Estilos responsivos para móviles (pantallas de hasta 480px de ancho) */
 @media (max-width: 480px) {
   body {
-    padding: 0.5rem;
+    padding: 0.5rem; /* Reducir el padding en dispositivos pequeños */
   }
 
   header h1 {
-    font-size: 1.4rem;
+    font-size: 1.4rem; /* Reducir el tamaño del título del encabezado */
   }
 
   table th,
   table td {
-    font-size: 0.8rem;
-    padding: 0.4rem;
+    font-size: 0.8rem; /* Reducir el tamaño de la fuente en las celdas de la tabla */
+    padding: 0.4rem; /* Reducir el padding en las celdas */
   }
 
   button {
-    width: 100%;
-    margin: 0.25rem 0;
+    width: 100%; /* Hacer los botones de ancho completo */
+    margin: 0.25rem 0; /* Espacio entre los botones */
   }
 }

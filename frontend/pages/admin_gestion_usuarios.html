@@ -1,44 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Configuración de codificación de caracteres -->
   <meta charset="UTF-8">
+  
+  <!-- Título de la página que se muestra en la pestaña del navegador -->
   <title>Gestión de Usuarios</title>
+  
+  <!-- Enlace a la hoja de estilos CSS para la página -->
   <link rel="stylesheet" href="../css/admin_gestion_usuarios.css">
+  
+  <!-- Script para validar sesión y permisos del usuario -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Obtener el usuario desde localStorage
       const usuarioRaw = localStorage.getItem('usuario');
+      
+      // Si no hay usuario, redirigir a la página de inicio
       if (!usuarioRaw) return location.href = '/index.html';
+      
+      // Parsear usuario y validar que tenga rol de administrador (id_rol = 3)
       const usuario = JSON.parse(usuarioRaw);
       if (usuario.id_rol !== 3) return location.href = '/index.html';
     });
   </script>
 </head>
 <body>
+  <!-- Cabecera con el título del panel y la navegación principal -->
   <header>
     <h1>Panel de Administración - Usuarios</h1>
     <nav>
+      <!-- Enlaces a diferentes secciones del panel de administración -->
       <a href="admin_dashboard.html">Dashboard</a>
       <a href="admin_gestion_productos.html">Productos</a>
       <a href="admin_gestion_ventas.html">Ventas</a>
       <a href="admin_gestion_reportes.html">Reportes</a>
+      
+      <!-- Botón para cerrar sesión -->
       <button id="logoutBtn">Cerrar sesión</button>
     </nav>
   </header>
+  
+  <!-- Tabla para mostrar la lista de usuarios -->
   <table border="1">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Cédula</th>
-        <th>Nombre</th>
-        <th>Correo</th>
-        <th>Rol</th>
-        <th>Estado</th>
-        <th>Acciones</th>
+        <th>ID</th> <!-- Columna para mostrar el ID del usuario -->
+        <th>Cédula</th> <!-- Columna para mostrar la cédula del usuario -->
+        <th>Nombre</th> <!-- Columna para mostrar el nombre del usuario -->
+        <th>Correo</th> <!-- Columna para mostrar el correo del usuario -->
+        <th>Rol</th> <!-- Columna para mostrar el rol del usuario -->
+        <th>Estado</th> <!-- Columna para mostrar el estado del usuario (activo, inactivo, etc.) -->
+        <th>Acciones</th> <!-- Columna para mostrar las acciones que se pueden realizar sobre el usuario (editar, eliminar, etc.) -->
       </tr>
     </thead>
+    
+    <!-- Cuerpo de la tabla donde se inyectarán los usuarios de manera dinámica -->
     <tbody id="tablaUsuarios"></tbody>
   </table>
 
+  <!-- Script para la lógica de gestión de usuarios -->
   <script src="../js/admin_gestion_usuarios.js"></script>
 </body>
 </html>

@@ -1,5 +1,9 @@
+// Importa el pool de conexiones a la base de datos
 import { pool } from '../config/db.js';
 
+// ---------------------------------------------
+// Obtener todos los productos disponibles
+// ---------------------------------------------
 export const obtenerProductos = async () => {
   const [rows] = await pool.query(`
     SELECT 
@@ -15,11 +19,14 @@ export const obtenerProductos = async () => {
     JOIN cultura c ON p.cultura_id = c.cultura_id
     JOIN piezas pi ON p.piezas_id = pi.piezas_id
     JOIN tamanio t ON p.tamanio_id = t.tamanio_id
-    WHERE p.estado = 'disponible'
+    WHERE p.estado = 'disponible' -- Filtra solo los productos activos o disponibles
   `);
-  return rows;
+  return rows; // Devuelve un arreglo con los productos encontrados
 };
 
+// ---------------------------------------------
+// Agregar un nuevo producto a la base de datos
+// ---------------------------------------------
 export const agregarProducto = async ({ piezas_id, cultura_id, tamanio_id, precio, stock, descripcion, imagen, modificado_por }) => {
   const [result] = await pool.query(
     `INSERT INTO productos 
@@ -27,14 +34,19 @@ export const agregarProducto = async ({ piezas_id, cultura_id, tamanio_id, preci
     VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), ?)`,
     [piezas_id, cultura_id, tamanio_id, precio, stock, descripcion, imagen, modificado_por]
   );
-  return result;
+  return result; // Devuelve el resultado de la inserción (incluye insertId, etc.)
 };
 
+// ---------------------------------------------
+// Actualizar información de un producto existente
+// ---------------------------------------------
 export const actualizarProducto = async (id, datos) => {
+  // Si no se reciben datos, se lanza un error
   if (!datos || Object.keys(datos).length === 0) {
     throw new Error('No se proporcionaron datos para actualizar');
   }
 
+  // Se preparan los campos y valores dinámicamente para armar la consulta SQL
   const campos = [];
   const valores = [];
 
@@ -43,25 +55,32 @@ export const actualizarProducto = async (id, datos) => {
     valores.push(valor);
   }
 
+  // Se agrega la fecha de modificación automáticamente
   campos.push('fecha_modificacion = NOW()');
-  valores.push(id);
+  valores.push(id); // Se agrega el ID al final para la cláusula WHERE
 
   const [result] = await pool.query(
     `UPDATE productos SET ${campos.join(', ')} WHERE producto_id = ?`,
     valores
   );
 
-  return result;
+  return result; // Devuelve el resultado de la actualización
 };
 
+// ---------------------------------------------
+// Eliminar un producto por su ID
+// ---------------------------------------------
 export const eliminarProducto = async (id) => {
   const [result] = await pool.query(
     'DELETE FROM productos WHERE producto_id = ?',
     [id]
   );
-  return result;
+  return result; // Devuelve cuántas filas fueron eliminadas
 };
 
+// ---------------------------------------------
+// Obtener un producto específico por su ID
+// ---------------------------------------------
 export async function obtenerProductoPorId(id) {
   const [rows] = await pool.query(`
     SELECT 
@@ -81,5 +100,5 @@ export async function obtenerProductoPorId(id) {
     WHERE p.producto_id = ?
   `, [id]);
 
-  return rows[0];
+  return rows[0]; // Devuelve un solo producto (el primero que coincida)
 }

@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Panel Admin</title>
-  <link rel="stylesheet" href="../css/admin_dashboard.css" />
-  <script src="../js/admin_dashboard.js" defer></script>
+  <meta charset="UTF-8"><!-- Define la codificación de caracteres para que soporte acentos y caracteres especiales -->
+  <title>Panel Admin</title><!-- Título que aparece en la pestaña del navegador -->
+  <link rel="stylesheet" href="../css/admin_dashboard.css" /><!-- Enlace a la hoja de estilos para esta página -->
+  <script src="../js/admin_dashboard.js" defer></script><!-- Enlace al archivo JavaScript que controla la funcionalidad, cargado de forma diferida -->
 </head>
 <body>
   <header>
+    <!-- Logo de la página -->
     <img src="../assets/img/logo.png" alt="Logo Precolombinos">
     <div>
+      <!-- Saludo personalizado para el administrador -->
       <h2 id="saludo">Bienvenido Admin</h2>
+      <!-- Botón para cerrar sesión -->
       <button id="logoutBtn">Cerrar sesión</button>
     </div>
   </header>
 
+  <!-- Título principal del panel -->
   <h3>Panel de Gestión</h3>
+
+  <!-- Menú de navegación para acceder a distintas secciones del panel de administración -->
   <nav>
     <ul>
-      <li><a href="admin_gestion_productos.html">Gestión de Productos</a></li>
-      <li><a href="admin_gestion_usuarios.html">Gestión de Usuarios</a></li>
-      <li><a href="admin_gestion_ventas.html">Gestión de Ventas</a></li>
-      <li><a href="admin_gestion_reportes.html">Reportes</a></li>
+      <li><a href="admin_gestion_productos.html">Gestión de Productos</a></li><!-- Link a la página para administrar productos -->
+      <li><a href="admin_gestion_usuarios.html">Gestión de Usuarios</a></li><!-- Link para administrar usuarios -->
+      <li><a href="admin_gestion_ventas.html">Gestión de Ventas</a></li><!-- Link para revisar y administrar ventas -->
+      <li><a href="admin_gestion_reportes.html">Reportes</a></li><!-- Link para generar y ver reportes -->
     </ul>
   </nav>
 </body>

@@ -1,78 +1,85 @@
+/* Estilo general para el cuerpo del documento */
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #000;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+  margin: 0; /* Elimina el margen predeterminado del body */
+  padding: 0; /* Elimina el relleno predeterminado del body */
+  font-family: 'Segoe UI', sans-serif; /* Establece la tipografía para todo el cuerpo */
+  background-color: #000; /* Fondo negro */
+  text-align: center; /* Centra el texto dentro del body */
+  display: flex; /* Utiliza Flexbox para organizar los elementos dentro del body */
+  flex-direction: column; /* Coloca los elementos en una columna */
+  align-items: center; /* Centra los elementos horizontalmente */
+  justify-content: center; /* Centra los elementos verticalmente */
+  height: 100vh; /* El body ocupa el 100% de la altura de la ventana */
 }
 
+/* Estilo para el título principal */
 h1 {
-  font-size: 2.5rem;
-  color: #fff;
-  margin-top: 20px;
+  font-size: 2.5rem; /* Tamaño grande para el título */
+  color: #fff; /* Color blanco para el texto */
+  margin-top: 20px; /* Espacio arriba del título */
 }
 
+/* Estilo para el logo o imagen antes del cuerpo */
 body::before {
-  content: '';
-  display: block;
-  background: url('../assets/img/logo.png') no-repeat center;
-  background-size: 150px;
-  height: 150px;
-  width: 100%;
-  margin-bottom: 20px;
+  content: ''; /* Es necesario para que funcione el pseudoelemento */
+  display: block; /* Hace que el pseudoelemento sea un bloque */
+  background: url('../assets/img/logo.png') no-repeat center; /* Establece una imagen de fondo (logo) centrada */
+  background-size: 150px; /* Ajusta el tamaño de la imagen de fondo */
+  height: 150px; /* Altura del pseudoelemento */
+  width: 100%; /* Ancho total */
+  margin-bottom: 20px; /* Agrega espacio abajo de la imagen */
 }
 
+/* Estilos para los enlaces */
 a {
-  display: inline-block;
-  margin: 10px 15px;
-  padding: 12px 25px;
-  text-decoration: none;
-  background-color: #D4AF37;
-  color: #000;
-  border-radius: 5px;
-  font-weight: bold;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-block; /* Hace que los enlaces sean bloques en línea */
+  margin: 10px 15px; /* Espacio alrededor de los enlaces */
+  padding: 12px 25px; /* Relleno dentro de los enlaces */
+  text-decoration: none; /* Elimina el subrayado predeterminado */
+  background-color: #D4AF37; /* Fondo dorado */
+  color: #000; /* Color de texto negro */
+  border-radius: 5px; /* Bordes redondeados */
+  font-weight: bold; /* Texto en negrita */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave en el cambio de color */
 }
 
+/* Efecto al pasar el ratón sobre el enlace */
 a:hover {
-  background-color: #b18e2d;
-  color: #fff;
+  background-color: #b18e2d; /* Cambia el fondo a un dorado más oscuro */
+  color: #fff; /* Cambia el color del texto a blanco */
 }
 
+/* Estilos para pantallas con un ancho máximo de 768px (tablets) */
 @media (max-width: 768px) {
   h1 {
-    font-size: 2rem;
+    font-size: 2rem; /* Reduce el tamaño de la fuente del título */
   }
 
   body::before {
-    background-size: 120px;
-    height: 120px;
+    background-size: 120px; /* Ajusta el tamaño de la imagen de fondo */
+    height: 120px; /* Reduce la altura del pseudoelemento */
   }
 
   a {
-    padding: 10px 20px;
+    padding: 10px 20px; /* Ajusta el relleno dentro de los enlaces */
   }
 }
 
+/* Estilos para pantallas con un ancho máximo de 480px (móviles) */
 @media (max-width: 480px) {
   h1 {
-    font-size: 1.8rem;
+    font-size: 1.8rem; /* Ajusta aún más el tamaño de la fuente del título */
   }
 
   body::before {
-    background-size: 90px;
-    height: 90px;
+    background-size: 90px; /* Ajusta el tamaño de la imagen de fondo */
+    height: 90px; /* Reduce la altura de la imagen */
   }
 
   a {
-    display: block;
-    width: 80%;
-    margin: 10px auto;
-    padding: 12px;
+    display: block; /* Hace que los enlaces sean bloques completos */
+    width: 80%; /* Los enlaces ocupan el 80% del ancho disponible */
+    margin: 10px auto; /* Centra los enlaces y agrega espacio alrededor */
+    padding: 12px; /* Ajusta el relleno dentro de los enlaces */
   }
 }

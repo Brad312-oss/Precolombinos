@@ -1,32 +1,47 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Definición de la codificación de caracteres y el título de la página -->
   <meta charset="UTF-8" />
   <title>Editar Perfil</title>
+  
+  <!-- Enlace al archivo de estilos CSS para la página de edición de perfil -->
   <link rel="stylesheet" href="../css/cliente_editar.css" />
 </head>
 <body>
+  <!-- Título principal de la página -->
   <h2>Editar Perfil</h2>
+
+  <!-- Formulario para editar los datos del perfil -->
   <form id="formEditarPerfil">
-  <label for="nombre">Nombre:</label>
-  <input type="text" id="nombre" name="nombre" required /><br>
+    <!-- Campo para ingresar el nombre del usuario -->
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required /><br>
 
-  <label for="apellido">Apellido:</label>
-  <input type="text" id="apellido" name="apellido" required /><br>
+    <!-- Campo para ingresar el apellido del usuario -->
+    <label for="apellido">Apellido:</label>
+    <input type="text" id="apellido" name="apellido" required /><br>
 
-  <label for="correo">Correo:</label>
-  <input type="email" id="correo" name="correo" required /><br>
+    <!-- Campo para ingresar el correo electrónico del usuario -->
+    <label for="correo">Correo:</label>
+    <input type="email" id="correo" name="correo" required /><br>
 
-  <label for="telefono">Teléfono:</label>
-  <input type="text" id="telefono" name="telefono" required /><br>
+    <!-- Campo para ingresar el teléfono del usuario -->
+    <label for="telefono">Teléfono:</label>
+    <input type="text" id="telefono" name="telefono" required /><br>
 
-  <label for="direccion">Dirección:</label>
-  <input type="text" id="direccion" name="direccion" required /><br>
+    <!-- Campo para ingresar la dirección del usuario -->
+    <label for="direccion">Dirección:</label>
+    <input type="text" id="direccion" name="direccion" required /><br>
 
-  <button type="submit">Guardar Cambios</button>
-  <button type="button" id="cancelarBtn">Cancelar</button>
-</form>
+    <!-- Botón para enviar el formulario y guardar los cambios -->
+    <button type="submit">Guardar Cambios</button>
 
+    <!-- Botón para cancelar la edición y regresar -->
+    <button type="button" id="cancelarBtn">Cancelar</button>
+  </form>
+
+  <!-- Enlace al archivo de JavaScript que manejará la lógica de edición -->
   <script src="../js/cliente_editar.js"></script>
 </body>
 </html>

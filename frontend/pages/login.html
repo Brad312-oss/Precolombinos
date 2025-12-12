@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Establecemos la codificación de caracteres y el título de la página -->
   <meta charset="UTF-8" />
   <title>Login</title>
+
+  <!-- Enlace al archivo de estilos CSS para personalizar la apariencia del login -->
   <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-   <header>
+  <!-- Cabecera con el logo de la página y el título -->
+  <header>
     <img src="../assets/img/logo.png" alt="Logo Precolombinos">
     <h2>Login</h2>
   </header>
+
+  <!-- Formulario para que el usuario ingrese su correo y contraseña -->
   <form id="loginForm">
+    <!-- Campo para ingresar el correo del usuario -->
     <input type="email" id="correo" placeholder="Correo" required />
+
+    <!-- Campo para ingresar la contraseña del usuario -->
     <input type="password" id="contraseña" placeholder="Contraseña" required />
+
+    <!-- Botón para enviar el formulario e iniciar sesión -->
     <button type="submit">Iniciar sesión</button>
   </form>
 
+  <!-- Enlace para recuperar la contraseña en caso de olvido -->
   <p><a href="#" id="olvideContrasena">¿Olvidaste tu contraseña?</a></p>
 
+  <!-- Enlace al archivo de JavaScript que maneja la lógica del login -->
   <script src="../js/login.js"></script>
 </body>
 </html>

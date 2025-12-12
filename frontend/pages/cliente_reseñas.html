@@ -1,28 +1,41 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Definición de la codificación de caracteres y el título de la página -->
   <meta charset="UTF-8" />
   <title>Reseñas</title>
+
+  <!-- Enlace al archivo de estilos CSS para la página de reseñas -->
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
+  <!-- Título principal de la página que indica que se trata de reseñas de productos -->
   <h2>Reseñas de Productos</h2>
 
+  <!-- Sección que contendrá las reseñas ya existentes -->
   <div id="listaResenas"></div>
 
+  <!-- Título para la sección de escritura de reseñas -->
   <h3>Escribir una Reseña</h3>
+
+  <!-- Formulario para enviar una nueva reseña -->
   <form id="formResena">
+    <!-- Campo para seleccionar el producto sobre el que se quiere escribir una reseña -->
     <label for="producto">Producto:</label>
     <select id="producto" required></select><br>
 
+    <!-- Campo para escribir el comentario de la reseña -->
     <label for="comentario">Comentario:</label><br>
     <textarea id="comentario" rows="4" cols="50" required></textarea><br>
 
+    <!-- Botón para enviar la reseña -->
     <button type="submit">Enviar Reseña</button>
   </form>
 
+  <!-- Botón para volver a la página de inicio del cliente -->
   <button onclick="window.location.href='./cliente_inicio.html'">Volver</button>
 
+  <!-- Enlace al archivo de JavaScript que manejará la lógica de las reseñas -->
   <script src="../js/cliente_reseñas.js"></script>
 </body>
 </html>

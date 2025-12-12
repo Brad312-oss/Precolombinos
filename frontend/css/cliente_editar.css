@@ -1,78 +1,87 @@
-/* Reset básico */
+/* Reset básico: elimina márgenes, rellenos y establece el box-sizing */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0; /* Elimina márgenes por defecto */
+  padding: 0; /* Elimina rellenos por defecto */
+  box-sizing: border-box; /* Incluye el padding y el borde en el ancho/alto total */
 }
 
+/* Estilos generales del body */
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #fdfdfd;
-  color: #111;
-  padding: 1rem;
+  font-family: 'Segoe UI', sans-serif; /* Fuente general */
+  background-color: #fdfdfd; /* Fondo blanco suave */
+  color: #111; /* Color de texto oscuro */
+  padding: 1rem; /* Relleno de 1rem a todos los lados */
 }
 
+/* Estilos para el encabezado h2 */
 h2 {
-  color: #000;
-  text-align: center;
-  margin-bottom: 1rem;
+  color: #000; /* Color negro */
+  text-align: center; /* Alineación centrada */
+  margin-bottom: 1rem; /* Espaciado inferior */
 }
 
+/* Estilos para el formulario */
 form {
-  max-width: 500px;
-  margin: 0 auto;
-  background-color: #fff;
-  padding: 2rem;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  max-width: 500px; /* Ancho máximo del formulario */
+  margin: 0 auto; /* Centrado horizontal */
+  background-color: #fff; /* Fondo blanco */
+  padding: 2rem; /* Relleno interno de 2rem */
+  border: 1px solid #ccc; /* Borde gris claro */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Sombra sutil para el formulario */
 }
 
+/* Estilos para las etiquetas dentro del formulario */
 label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
+  display: block; /* Que el label ocupe todo el ancho */
+  margin-bottom: 0.5rem; /* Espaciado inferior */
+  font-weight: bold; /* Negrita para las etiquetas */
 }
 
+/* Estilos para los campos de input */
 input {
-  width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  width: 100%; /* Ocupa el 100% del ancho disponible */
+  padding: 0.5rem; /* Relleno interno de 0.5rem */
+  margin-bottom: 1rem; /* Margen inferior de 1rem */
+  border: 1px solid #ccc; /* Borde gris claro */
+  border-radius: 5px; /* Bordes redondeados */
 }
 
+/* Estilos para el botón */
 button {
-  background-color: #000;
-  color: #ffd700;
-  border: none;
-  padding: 0.6rem 1rem;
-  margin-right: 0.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s;
+  background-color: #000; /* Fondo negro */
+  color: #ffd700; /* Texto dorado */
+  border: none; /* Sin borde */
+  padding: 0.6rem 1rem; /* Relleno interno */
+  margin-right: 0.5rem; /* Espaciado a la derecha */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor de puntero */
+  font-weight: bold; /* Texto en negrita */
+  transition: background-color 0.3s; /* Transición suave en el color de fondo */
 }
 
+/* Estilos para el hover del botón */
 button:hover {
-  background-color: #333;
+  background-color: #333; /* Cambia el fondo a gris oscuro cuando se pasa el mouse */
 }
 
-/* Responsive para tablet */
+/* === Responsive === */
+
+/* Estilos para pantallas de hasta 768px (tabletas) */
 @media (max-width: 768px) {
   form {
-    padding: 1rem;
+    padding: 1rem; /* Reduce el padding interno del formulario */
   }
 }
 
-/* Responsive para móvil */
+/* Estilos para pantallas de hasta 480px (móviles) */
 @media (max-width: 480px) {
   form {
-    padding: 0.5rem;
+    padding: 0.5rem; /* Aumenta aún más la reducción de padding */
   }
 
   button {
-    width: 100%;
-    margin-bottom: 0.5rem;
+    width: 100%; /* El botón ocupa todo el ancho */
+    margin-bottom: 0.5rem; /* Añade un margen inferior */
   }
 }

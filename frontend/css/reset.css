@@ -1,88 +1,98 @@
+/* Restablece márgenes, rellenos y ajusta el modelo de caja para todos los elementos */
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f4f4f4;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-  justify-content: center;
+  margin: 0; /* Elimina el margen por defecto */
+  padding: 0; /* Elimina el relleno por defecto */
+  font-family: 'Segoe UI', sans-serif; /* Establece la tipografía del cuerpo */
+  background-color: #f4f4f4; /* Fondo gris claro */
+  display: flex; /* Utiliza Flexbox para organizar los elementos dentro del body */
+  flex-direction: column; /* Coloca los elementos en una columna */
+  align-items: center; /* Centra los elementos horizontalmente */
+  min-height: 100vh; /* El cuerpo ocupa al menos el 100% de la altura de la ventana */
+  justify-content: center; /* Centra los elementos verticalmente */
 }
 
+/* Contenedor principal donde se encuentra el formulario */
 .container {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 8px;
-  width: 400px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  position: relative;
+  background-color: #fff; /* Fondo blanco para el contenedor */
+  padding: 30px; /* Espaciado interno dentro del contenedor */
+  border-radius: 8px; /* Bordes redondeados */
+  width: 400px; /* El contenedor tiene un ancho fijo de 400px */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave alrededor del contenedor */
+  text-align: center; /* Centra el texto dentro del contenedor */
+  position: relative; /* Posicionamiento relativo para poder usar pseudo-elementos */
 }
 
+/* Estilo para el título dentro del contenedor */
 .container h2 {
-  margin-bottom: 20px;
-  color: #333;
+  margin-bottom: 20px; /* Agrega espacio debajo del título */
+  color: #333; /* Color oscuro para el texto del título */
 }
 
+/* Pseudo-elemento para agregar un logo antes del contenido */
 .container::before {
-  content: '';
-  display: block;
-  background: url('../assets/img/logo.png') no-repeat center;
-  background-size: 120px;
-  height: 120px;
-  margin: 0 auto 20px auto;
+  content: ''; /* Crea un pseudo-elemento vacío */
+  display: block; /* Lo convierte en un bloque */
+  background: url('../assets/img/logo.png') no-repeat center; /* Fondo con el logo */
+  background-size: 120px; /* Tamaño del logo */
+  height: 120px; /* Altura del logo */
+  margin: 0 auto 20px auto; /* Centra el logo y agrega espacio abajo */
 }
 
+/* Estilo para el campo de entrada de contraseña */
 form input[type="password"] {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  width: 100%; /* El campo de entrada ocupa todo el ancho disponible */
+  padding: 12px; /* Espaciado interno en el campo de entrada */
+  margin-bottom: 15px; /* Espacio debajo del campo de entrada */
+  border: 1px solid #ccc; /* Borde sutil alrededor del campo */
+  border-radius: 5px; /* Bordes redondeados */
 }
 
+/* Estilo para el botón de envío dentro del formulario */
 form button {
-  width: 100%;
-  padding: 12px;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
+  width: 100%; /* El botón ocupa todo el ancho disponible */
+  padding: 12px; /* Espaciado interno en el botón */
+  background-color: #007BFF; /* Fondo azul para el botón */
+  color: white; /* Texto blanco en el botón */
+  border: none; /* Sin borde alrededor del botón */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* El cursor cambia a puntero cuando pasa sobre el botón */
+  font-weight: bold; /* Texto en negrita */
 }
 
+/* Estilo del botón al pasar el ratón por encima */
 form button:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Cambia el fondo a un azul más oscuro al pasar el ratón */
 }
 
+/* Estilo para el mensaje de error */
 #mensaje {
-  margin-top: 15px;
-  color: #d9534f;
-  font-weight: bold;
+  margin-top: 15px; /* Espacio arriba del mensaje de error */
+  color: #d9534f; /* Color rojo para el mensaje de error */
+  font-weight: bold; /* Texto en negrita */
 }
 
+/* Estilos para pantallas con un ancho máximo de 768px (tablets) */
 @media (max-width: 768px) {
   .container {
-    width: 90%;
-    padding: 25px;
+    width: 90%; /* El contenedor ocupa el 90% del ancho disponible */
+    padding: 25px; /* Ajusta el relleno dentro del contenedor */
   }
 }
 
+/* Estilos para pantallas con un ancho máximo de 480px (móviles) */
 @media (max-width: 480px) {
   .container::before {
-    background-size: 80px;
-    height: 80px;
-    margin-bottom: 15px;
+    background-size: 80px; /* Reduce el tamaño del logo */
+    height: 80px; /* Ajusta la altura del logo */
+    margin-bottom: 15px; /* Ajusta el espacio debajo del logo */
   }
 
   .container {
-    padding: 20px;
+    padding: 20px; /* Ajusta el relleno dentro del contenedor */
   }
 
   form input,
   form button {
-    padding: 10px;
+    padding: 10px; /* Ajusta el relleno dentro de los campos de entrada y el botón */
   }
 }

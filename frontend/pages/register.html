@@ -1,26 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Establecemos la codificación de caracteres y el título de la página -->
   <meta charset="UTF-8" />
   <title>Registro</title>
+
+  <!-- Enlazamos el archivo CSS que contiene los estilos para la página de registro -->
   <link rel="stylesheet" href="../css/register.css">
 </head>
 <body>
+  <!-- Cabecera con el logo de la página -->
   <header>
     <img src="../assets/img/logo.png" alt="Logo Precolombinos">
   </header>
+
+  <!-- Título de la página -->
   <h2>Registro</h2>
+
+  <!-- Formulario para que los usuarios se registren -->
   <form id="registroForm">
+    <!-- Campo para el nombre del usuario -->
     <input type="text" id="nombre" placeholder="Nombre" required />
+
+    <!-- Campo para el apellido del usuario -->
     <input type="text" id="apellido" placeholder="Apellido" required />
+
+    <!-- Campo para el correo electrónico del usuario -->
     <input type="email" id="correo" placeholder="Correo" required />
+
+    <!-- Campo para la cédula del usuario -->
     <input type="text" id="cedula" placeholder="Cedula" required />
+
+    <!-- Campo para el teléfono del usuario -->
     <input type="text" id="telefono" placeholder="Telefono" required />
+
+    <!-- Campo para la dirección del usuario -->
     <input type="text" id="direccion" placeholder="Direccion" required />
+
+    <!-- Campo para la fecha y hora del registro -->
     <input type="datetime-local" id="fecha_registro" placeholder="Fecha_registro" required />
+
+    <!-- Campo para la contraseña del usuario -->
     <input type="password" id="contrasena" placeholder="Contraseña" required />
+
+    <!-- Botón para enviar el formulario y registrar al usuario -->
     <button type="submit">Registrar</button>
   </form>
+
+  <!-- Enlace al archivo JavaScript que maneja la lógica del registro -->
   <script src="../js/register.js"></script>
 </body>
 </html>

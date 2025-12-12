@@ -1,86 +1,116 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Configuración de la codificación de caracteres y diseño responsivo -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- Título de la página en la pestaña del navegador -->
   <title>Gestión de Ventas - Admin</title>
+  
+  <!-- Enlace a la hoja de estilos CSS -->
   <link rel="stylesheet" href="../css/admin_gestion_ventas.css">
+  
+  <!-- Script para validar la sesión y los permisos del usuario -->
   <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const usuarioRaw = localStorage.getItem('usuario');
-    if (!usuarioRaw) return location.href = '/index.html';
-    const usuario = JSON.parse(usuarioRaw);
-    if (usuario.id_rol !== 3) return location.href = '/index.html';
-  });
-</script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Obtener el usuario almacenado en localStorage
+      const usuarioRaw = localStorage.getItem('usuario');
+      
+      // Si no hay usuario, redirigir a la página de inicio
+      if (!usuarioRaw) return location.href = '/index.html';
+      
+      // Parsear el usuario y verificar que tenga el rol de administrador (id_rol = 3)
+      const usuario = JSON.parse(usuarioRaw);
+      if (usuario.id_rol !== 3) return location.href = '/index.html';
+    });
+  </script>
 </head>
 <body>
+  <!-- Cabecera con el título y la navegación principal -->
   <header>
     <h1>Panel de Administración - Ventas</h1>
     <nav>
+      <!-- Enlaces a diferentes secciones del panel de administración -->
       <a href="admin_dashboard.html">Dashboard</a>
       <a href="admin_gestion_productos.html">Productos</a>
       <a href="admin_gestion_usuarios.html">Usuarios</a>
       <a href="admin_gestion_reportes.html">Reportes</a>
+      
+      <!-- Botón para cerrar sesión -->
       <button id="logoutBtn">Cerrar sesión</button>
     </nav>
   </header>
+  
+  <!-- Contenido principal de la página -->
   <main>
+    <!-- Sección para mostrar la lista de ventas registradas -->
     <section>
       <h2>Lista de Ventas</h2>
+      
+      <!-- Tabla para mostrar las ventas -->
       <table>
         <thead>
           <tr>
-            <th>ID Venta</th>
-            <th>Cliente</th>
-            <th>Fecha</th>
-            <th>Estado</th>
-            <th>Total</th>
-            <th>Acciones</th>
+            <th>ID Venta</th> <!-- Identificador único de la venta -->
+            <th>Cliente</th> <!-- Nombre del cliente -->
+            <th>Fecha</th> <!-- Fecha de la venta -->
+            <th>Estado</th> <!-- Estado de la venta (ej. "pendiente", "completada", etc.) -->
+            <th>Total</th> <!-- Monto total de la venta -->
+            <th>Acciones</th> <!-- Columna para realizar acciones sobre la venta (editar, eliminar, etc.) -->
           </tr>
         </thead>
-        <tbody id="tablaVentas">
-        </tbody>
+        <tbody id="tablaVentas"></tbody> <!-- Aquí se mostrarán las filas dinámicamente -->
       </table>
     </section>
 
+    <!-- Sección para registrar una nueva venta -->
     <section>
-  <h2>Registrar Nueva Venta</h2>
-  <form id="formRegistrarVenta">
-    <label for="clienteSelect">Cliente:</label>
-    <select id="clienteSelect" name="cliente" required></select>
+      <h2>Registrar Nueva Venta</h2>
+      <form id="formRegistrarVenta">
+        <!-- Selector de cliente -->
+        <label for="clienteSelect">Cliente:</label>
+        <select id="clienteSelect" name="cliente" required></select>
+        
+        <!-- Tabla de productos que se incluirán en la venta -->
+        <label>Productos:</label>
+        <table id="productosVenta">
+          <thead>
+            <tr>
+              <th>Producto</th> <!-- Nombre del producto -->
+              <th>Cantidad</th> <!-- Cantidad del producto -->
+              <th>Precio Unitario</th> <!-- Precio de cada unidad del producto -->
+              <th>Subtotal</th> <!-- Subtotal calculado (precio unitario * cantidad) -->
+              <th>Acciones</th> <!-- Acciones para eliminar o modificar productos en la venta -->
+            </tr>
+          </thead>
+          <tbody></tbody> <!-- Aquí se agregarán los productos seleccionados -->
+        </table>
+        
+        <!-- Botón para agregar más productos a la venta -->
+        <button type="button" id="agregarProducto">+ Agregar Producto</button>
 
-    <label>Productos:</label>
-    <table id="productosVenta">
-      <thead>
-        <tr>
-          <th>Producto</th>
-          <th>Cantidad</th>
-          <th>Precio Unitario</th>
-          <th>Subtotal</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <button type="button" id="agregarProducto">+ Agregar Producto</button>
-
-    <p><strong>Total:</strong> $<span id="totalVenta">0.00</span></p>
-
-    <button type="submit">Registrar Venta</button>
-  </form>
-</section>
+        <!-- Mostrar el total de la venta -->
+        <p><strong>Total:</strong> $<span id="totalVenta">0.00</span></p>
+        
+        <!-- Botón para enviar el formulario y registrar la venta -->
+        <button type="submit">Registrar Venta</button>
+      </form>
+    </section>
   </main>
 
+  <!-- Script para manejar la lógica de la página, como el cierre de sesión -->
   <script src="../js/admin_gestion_ventas.js"></script>
+  
+  <!-- Script para manejar el cierre de sesión -->
   <script>
-  const logoutBtn = document.getElementById('logoutBtn');
-  if (logoutBtn) {
-    logoutBtn.addEventListener('click', () => {
-      localStorage.clear();
-      window.location.replace('/index.html');
-    });
-  }
-</script>
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', () => {
+        localStorage.clear(); // Limpiar los datos de sesión
+        window.location.replace('/index.html'); // Redirigir al inicio
+      });
+    }
+  </script>
 </body>
 </html>

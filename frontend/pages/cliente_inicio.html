@@ -1,22 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Definición de la codificación de caracteres y el título de la página -->
   <meta charset="UTF-8" />
   <title>Inicio Cliente</title>
+  
+  <!-- Enlace al archivo de estilos CSS para la página de inicio del cliente -->
   <link rel="stylesheet" href="../css/cliente_inicio.css" />
 </head>
 <body>
 
+  <!-- Encabezado de la página que contiene el logo de la aplicación -->
   <header>
+    <!-- Imagen del logo de la empresa, utilizada como elemento visual en la cabecera -->
     <img src="../assets/img/logo.png" alt="Logo Precolombinos">
   </header>
 
+  <!-- Título principal de la página para saludar al cliente -->
   <h2>Bienvenido Cliente</h2>
+
+  <!-- Botón para acceder a la página de edición de perfil -->
   <button id="editarPerfilBtn">Editar Perfil</button>
+
+  <!-- Botón para acceder al catálogo de productos -->
   <button id="verCatalogoBtn">Ir al Catálogo</button>
+
+  <!-- Botón para acceder a la página de reseñas, con la posibilidad de ver y escribir reseñas -->
   <button onclick="window.location.href = './cliente_reseñas.html'">Ver y escribir reseñas</button>
+
+  <!-- Botón para cerrar sesión -->
   <button id="logoutBtn">Cerrar sesión</button>
 
+  <!-- Enlace al archivo de JavaScript que manejará la lógica de la página -->
   <script src="../js/cliente_inicio.js"></script>
 </body>
 </html>

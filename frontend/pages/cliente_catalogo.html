@@ -1,59 +1,96 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Definición de la codificación de caracteres y el título de la página -->
   <meta charset="UTF-8" />
   <title>Cliente</title>
+  
+  <!-- Enlace al archivo de estilos CSS para la página -->
   <link rel="stylesheet" href="../css/cliente_catalogo.css">
 </head>
 <body>
+  <!-- Encabezado con el logo y el saludo al cliente -->
   <header>
-  <div class="header-left">
-    <img src="../assets/img/logo.png" alt="Logo Precolombinos">
-    <h2>Bienvenido Cliente</h2>
-  </div>
-  <button id="logoutBtn">Cerrar sesión</button>
-</header>
+    <div class="header-left">
+      <!-- Imagen del logo -->
+      <img src="../assets/img/logo.png" alt="Logo Precolombinos">
+      <!-- Mensaje de bienvenida al cliente -->
+      <h2>Bienvenido Cliente</h2>
+    </div>
+    
+    <!-- Botón para cerrar sesión -->
+    <button id="logoutBtn">Cerrar sesión</button>
+  </header>
 
+  <!-- Título del catálogo de productos -->
   <h2>Catálogo de Productos</h2>
+
+  <!-- Contenedor para los productos, que se llenará dinámicamente con JavaScript -->
   <div id="catalogo" class="catalogo-container"></div>
 
-  <h3>Total: $<span id="total-carrito">0.00</span></h3>
+  <!-- Sección de compra, inicialmente oculta -->
+  <div id="seccionCompra" style="display: none;">
+    <!-- Total de la compra, que se actualizará dinámicamente -->
+    <h3>Total: $<span id="total-carrito">0.00</span></h3>
 
-  <h3>Selecciona el tipo de pago:</h3>
-  <select id="tipoPago">
-    <option value="">--Seleccionar--</option>
-    <option value="efectivo">Efectivo</option>
-    <option value="tarjeta">Tarjeta</option>
-    <option value="transferencia">Transferencia</option>
-  </select>
+    <!-- Selector para el tipo de pago -->
+    <h3>Selecciona el tipo de pago:</h3>
+    <select id="tipoPago">
+      <option value="">--Seleccionar--</option>
+      <option value="efectivo">Efectivo</option>
+      <option value="tarjeta">Tarjeta</option>
+      <option value="transferencia">Transferencia</option>
+    </select>
 
-  <br><br>
-  <button id="comprarBtn">Finalizar Compra</button>
+    <br><br>
+    
+    <!-- Botón para finalizar la compra -->
+    <button id="comprarBtn">Finalizar Compra</button>
+  </div>
+
+  <!-- Script para manejar la lógica del catálogo de productos -->
+  <script type="module" src="../js/cliente_catalogo.js"></script>
+
+  <!-- Script que valida la sesión del cliente y controla el flujo de la compra -->
   <script>
-  document.addEventListener('DOMContentLoaded', async () => {
-    const token = localStorage.getItem('token');
-    if (!token) return window.location.href = '../login.html';
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Obtener el token de autenticación desde el localStorage
+      const token = localStorage.getItem('token');
+      const seccionCompra = document.getElementById('seccionCompra');
+      const logoutBtn = document.getElementById('logoutBtn');
 
-    try {
-      const res = await fetch('/api/auth/verificar', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-
-      const data = await res.json();
-      if (!res.ok || data.usuario.id_rol !== 1) {
-        return window.location.href = '../login.html';
+      // Si no hay token, significa que el cliente no está autenticado, ocultamos el botón de logout y la sección de compra
+      if (!token) {
+        logoutBtn.style.display = 'none';
+        seccionCompra.style.display = 'none';
+        return;
       }
-    } catch (err) {
-      console.error(err);
-      window.location.href = '../login.html';
-    }
-  });
-</script>
 
-  <script src="../js/cliente_catalogo.js" type="module"></script>
-  <script>
+      // Verificar el token con una solicitud a la API para asegurarnos que el cliente está autenticado correctamente
+      try {
+        const res = await fetch('/api/auth/verificar', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        // Si la respuesta es exitosa y el rol del usuario es 1 (cliente), mostramos la sección de compra
+        const data = await res.json();
+        if (res.ok && data.usuario.id_rol === 1) {
+          seccionCompra.style.display = 'block';
+        } else {
+          // Si no es un cliente, redirigimos al login
+          window.location.href = '../login.html';
+        }
+      } catch (err) {
+        // Si ocurre un error al verificar la sesión, redirigimos al login
+        console.error(err);
+        window.location.href = '../login.html';
+      }
+    });
+
+    // Manejador de evento para el botón de cierre de sesión
     document.getElementById('logoutBtn').addEventListener('click', () => {
-      window.location.replace('/index.html');
+      localStorage.clear(); // Limpiar los datos del localStorage
+      window.location.replace('/index.html'); // Redirigir a la página principal
     });
   </script>
 </body>

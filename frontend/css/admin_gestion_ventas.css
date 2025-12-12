@@ -1,187 +1,210 @@
+/* Reset general para todos los elementos, asegurando que no haya márgenes ni padding por defecto */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0; /* Elimina márgenes */
+  padding: 0; /* Elimina relleno */
+  box-sizing: border-box; /* Asegura que el padding y los márgenes no afecten al ancho de los elementos */
 }
 
+/* Estilos para el cuerpo de la página */
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f2f2f2;
-  color: #1a1a1a;
-  padding: 20px;
+  font-family: 'Segoe UI', sans-serif; /* Fuente principal */
+  background-color: #f2f2f2; /* Fondo gris claro */
+  color: #1a1a1a; /* Color del texto (gris oscuro) */
+  padding: 20px; /* Espaciado alrededor del contenido */
 }
 
+/* Estilos para el encabezado */
 header {
-  background-color: #000;
-  color: #ffd700;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  background-color: #000; /* Fondo negro */
+  color: #ffd700; /* Texto dorado */
+  padding: 20px; /* Espaciado interno */
+  display: flex; /* Usar Flexbox para los elementos del encabezado */
+  align-items: center; /* Alinear los elementos verticalmente */
+  justify-content: space-between; /* Distribuir los elementos entre el espacio disponible */
+  flex-wrap: wrap; /* Permitir que los elementos se envuelvan si es necesario */
 }
 
+/* Estilos para el título del encabezado */
 header h1 {
-  font-size: 24px;
+  font-size: 24px; /* Tamaño del texto */
 }
 
+/* Estilos para la barra de navegación */
 nav {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-  margin-top: 10px;
+  display: flex; /* Usar Flexbox para los enlaces y botones */
+  gap: 15px; /* Espacio entre los elementos */
+  flex-wrap: wrap; /* Permitir que los elementos se envuelvan */
+  margin-top: 10px; /* Espaciado superior */
 }
 
+/* Estilos para los enlaces y botones dentro de la barra de navegación */
 nav a,
 nav button {
-  background-color: #ffd700;
-  color: #000;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  background-color: #ffd700; /* Fondo dorado */
+  color: #000; /* Texto negro */
+  padding: 8px 12px; /* Espaciado interno */
+  border: none; /* Sin bordes */
+  border-radius: 6px; /* Bordes redondeados */
+  text-decoration: none; /* Eliminar subrayado */
+  font-weight: bold; /* Texto en negrita */
+  cursor: pointer; /* Cambiar el cursor a puntero */
+  transition: background-color 0.3s; /* Transición suave para el fondo */
 }
 
+/* Estilos para cuando el ratón pasa por encima de los enlaces y botones */
 nav a:hover,
 nav button:hover {
-  background-color: #e5c100;
+  background-color: #e5c100; /* Fondo más oscuro cuando el ratón pasa por encima */
 }
 
+/* Estilos para el contenido principal */
 main {
-  margin-top: 30px;
+  margin-top: 30px; /* Espaciado superior */
 }
 
+/* Estilos para los encabezados dentro del contenido principal */
 h2 {
-  margin-bottom: 15px;
-  color: #000;
+  margin-bottom: 15px; /* Espaciado inferior */
+  color: #000; /* Texto negro */
 }
 
+/* Estilos para las tablas */
 table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 25px;
-  background: #fff;
-  border: 1px solid #ccc;
+  width: 100%; /* La tabla ocupa todo el ancho disponible */
+  border-collapse: collapse; /* Eliminar el espacio entre las celdas */
+  margin-bottom: 25px; /* Espaciado inferior */
+  background: #fff; /* Fondo blanco */
+  border: 1px solid #ccc; /* Borde gris claro */
 }
 
+/* Estilos para las celdas de las tablas */
 table th,
 table td {
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: left;
+  border: 1px solid #ccc; /* Borde gris claro */
+  padding: 10px; /* Espaciado interno */
+  text-align: left; /* Alinear el texto a la izquierda */
 }
 
+/* Estilos para los encabezados de la tabla */
 table th {
-  background-color: #000;
-  color: #ffd700;
+  background-color: #000; /* Fondo negro para los encabezados */
+  color: #ffd700; /* Texto dorado */
 }
 
+/* Estilos para los botones */
 button {
-  background-color: #000;
-  color: #ffd700;
-  border: none;
-  padding: 6px 10px;
-  margin: 2px;
-  border-radius: 5px;
-  cursor: pointer;
+  background-color: #000; /* Fondo negro */
+  color: #ffd700; /* Texto dorado */
+  border: none; /* Sin bordes */
+  padding: 6px 10px; /* Espaciado interno */
+  margin: 2px; /* Espaciado entre botones */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambiar el cursor a puntero */
 }
 
+/* Estilos para cuando el ratón pasa por encima de los botones */
 button:hover {
-  background-color: #333;
+  background-color: #333; /* Fondo gris oscuro cuando el ratón pasa por encima */
 }
 
+/* Estilos para los formularios */
 form {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  background-color: #fff; /* Fondo blanco */
+  padding: 20px; /* Espaciado interno */
+  border-radius: 8px; /* Bordes redondeados */
+  border: 1px solid #ccc; /* Borde gris claro */
 }
 
+/* Estilos para las etiquetas dentro de los formularios */
 form label {
-  display: block;
-  margin-top: 10px;
-  font-weight: bold;
+  display: block; /* Hacer que las etiquetas ocupen todo el ancho disponible */
+  margin-top: 10px; /* Espaciado superior */
+  font-weight: bold; /* Texto en negrita */
 }
 
+/* Estilos para los inputs y selects dentro de los formularios */
 form select,
 form input[type="number"] {
-  width: 100%;
-  padding: 8px;
-  margin-top: 4px;
-  margin-bottom: 12px;
-  border: 1px solid #aaa;
-  border-radius: 5px;
+  width: 100%; /* Ocupa todo el ancho disponible */
+  padding: 8px; /* Espaciado interno */
+  margin-top: 4px; /* Espaciado superior */
+  margin-bottom: 12px; /* Espaciado inferior */
+  border: 1px solid #aaa; /* Borde gris claro */
+  border-radius: 5px; /* Bordes redondeados */
 }
 
+/* Estilos para la sección de productos de venta */
 #productosVenta {
-  margin-top: 10px;
+  margin-top: 10px; /* Espaciado superior */
 }
 
+/* Estilos para el total de la venta */
 #totalVenta {
-  font-size: 18px;
-  color: #000;
-  font-weight: bold;
+  font-size: 18px; /* Tamaño de la fuente */
+  color: #000; /* Texto negro */
+  font-weight: bold; /* Texto en negrita */
 }
 
 /* === Responsive === */
+
+/* Estilos para pantallas más pequeñas (hasta 768px de ancho) */
 @media screen and (max-width: 768px) {
   nav {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: column; /* Colocar los elementos de la navegación en columna */
+    align-items: flex-start; /* Alinear los elementos a la izquierda */
   }
 
   table th,
   table td {
-    font-size: 14px;
-    padding: 8px;
+    font-size: 14px; /* Reducir el tamaño de la fuente en las celdas */
+    padding: 8px; /* Reducir el padding de las celdas */
   }
 
   header h1 {
-    font-size: 20px;
+    font-size: 20px; /* Reducir el tamaño del título en pantallas pequeñas */
   }
 }
 
+/* Estilos para pantallas aún más pequeñas (hasta 480px de ancho) */
 @media screen and (max-width: 480px) {
   header {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: column; /* Colocar los elementos en columna */
+    align-items: flex-start; /* Alinear los elementos a la izquierda */
   }
 
   nav {
-    width: 100%;
+    width: 100%; /* Hacer que la barra de navegación ocupe todo el ancho disponible */
   }
 
   nav a,
   nav button {
-    width: 100%;
-    text-align: center;
+    width: 100%; /* Hacer que los botones y enlaces de navegación ocupen todo el ancho */
+    text-align: center; /* Centrar el texto */
   }
 
   table,
   form {
-    font-size: 14px;
+    font-size: 14px; /* Reducir el tamaño de la fuente en la tabla y formulario */
   }
 
   button {
-    width: 100%;
-    margin: 5px 0;
+    width: 100%; /* Hacer que los botones ocupen todo el ancho disponible */
+    margin: 5px 0; /* Espaciado entre botones */
   }
 
   form label {
-    font-size: 14px;
+    font-size: 14px; /* Reducir el tamaño de la fuente en las etiquetas */
   }
 }
 
+/* Estilo para el logo dentro del encabezado */
 header::before {
-  content: '';
-  background-image: url('../assets/img/logo.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 40px;
-  height: 40px;
-  display: inline-block;
-  margin-right: 15px;
+  content: ''; /* Crear un contenido vacío */
+  background-image: url('../assets/img/logo.png'); /* Establecer la imagen del logo */
+  background-size: contain; /* Ajustar la imagen al tamaño del contenedor */
+  background-repeat: no-repeat; /* Evitar que la imagen se repita */
+  width: 40px; /* Establecer el ancho del logo */
+  height: 40px; /* Establecer la altura del logo */
+  display: inline-block; /* Mostrar el logo como un bloque en línea */
+  margin-right: 15px; /* Espaciado a la derecha del logo */
 }
